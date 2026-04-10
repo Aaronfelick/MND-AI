@@ -1,0 +1,172 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://greenstitch.ae#local-business",
+  "name": "Green Stitch Tailoring",
+  "description": "Green Stitch Tailoring is a Sharjah-based tailoring studio focused on alterations, repairs, and custom fits using sustainable fabrics and low-waste production practices.",
+  "url": "https://greenstitch.ae",
+  "image": "https://greenstitch.ae/images/storefront.jpg",
+  "telephone": "+97165551234",
+  "email": "hello@greenstitch.ae",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Al Majaz 2, Corniche Street",
+    "addressLocality": "Sharjah",
+    "addressRegion": "Sharjah",
+    "postalCode": "00000",
+    "addressCountry": "AE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 25.3373,
+    "longitude": 55.3872
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Sharjah"
+    },
+    {
+      "@type": "City",
+      "name": "Dubai"
+    },
+    {
+      "@type": "City",
+      "name": "Ajman"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Green Stitch Tailoring services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Alterations and repairs",
+        "description": "Fast hemming, resizing, zip replacement, and garment repair for everyday wear and uniforms.",
+        "url": "https://greenstitch.ae/services/alterations",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Alterations and repairs",
+          "description": "Fast hemming, resizing, zip replacement, and garment repair for everyday wear and uniforms.",
+          "serviceType": "Alterations and repairs",
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Sharjah"
+            },
+            {
+              "@type": "City",
+              "name": "Dubai"
+            },
+            {
+              "@type": "City",
+              "name": "Ajman"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Custom tailoring",
+        "description": "Made-to-measure tailoring for dresses, abayas, suits, and event wear with fabric guidance and fitting support.",
+        "url": "https://greenstitch.ae/services/custom-tailoring",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom tailoring",
+          "description": "Made-to-measure tailoring for dresses, abayas, suits, and event wear with fabric guidance and fitting support.",
+          "serviceType": "Custom tailoring",
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Sharjah"
+            },
+            {
+              "@type": "City",
+              "name": "Dubai"
+            },
+            {
+              "@type": "City",
+              "name": "Ajman"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Sustainable wardrobe refresh",
+        "description": "Repurpose existing garments with fit improvements, repairs, and styling adjustments before replacing them.",
+        "url": "https://greenstitch.ae/services/wardrobe-refresh",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Sustainable wardrobe refresh",
+          "description": "Repurpose existing garments with fit improvements, repairs, and styling adjustments before replacing them.",
+          "serviceType": "Sustainable wardrobe refresh",
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Sharjah"
+            },
+            {
+              "@type": "City",
+              "name": "Dubai"
+            },
+            {
+              "@type": "City",
+              "name": "Ajman"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "sameAs": [
+    "https://www.instagram.com/greenstitchae",
+    "https://www.facebook.com/greenstitchae"
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Monday",
+      "opens": "10:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Tuesday",
+      "opens": "10:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Wednesday",
+      "opens": "10:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Thursday",
+      "opens": "10:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "10:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Friday",
+      "opens": "15:00",
+      "closes": "20:00"
+    }
+  ],
+  "priceRange": "$$",
+  "currenciesAccepted": "AED",
+  "paymentAccepted": "Cash, Card, Apple Pay",
+  "keywords": "Green Stitch Tailoring, Sustainable tailor, Sharjah, Dubai, Ajman, alterations Sharjah, garment repair, hemming service, custom tailoring Sharjah, made to measure, abaya tailoring, sustainable tailor, upcycling clothes, eco friendly tailoring, Member of a UAE artisan and makers network, Repair before replacement workflow, Low-waste fabric usage for alterations",
+  "knowsLanguage": [
+    "English",
+    "Arabic"
+  ]
+}

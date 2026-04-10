@@ -1,0 +1,33 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://greenstitch.ae#organization",
+  "name": "Green Stitch Tailoring",
+  "legalName": "Green Stitch Tailoring LLC",
+  "url": "https://greenstitch.ae",
+  "logo": "https://greenstitch.ae/images/storefront.jpg",
+  "description": "Green Stitch Tailoring is a Sharjah-based tailoring studio focused on alterations, repairs, and custom fits using sustainable fabrics and low-waste production practices.",
+  "slogan": "Sustainable tailoring for everyday wardrobes.",
+  "foundingDate": "2021",
+  "sameAs": [
+    "https://www.instagram.com/greenstitchae",
+    "https://www.facebook.com/greenstitchae"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": "+97165551234",
+    "email": "hello@greenstitch.ae",
+    "availableLanguage": [
+      "English",
+      "Arabic"
+    ],
+    "areaServed": [
+      "Sharjah",
+      "Dubai",
+      "Ajman"
+    ],
+    "contactOption": "WhatsApp",
+    "url": "https://wa.me/971501234567"
+  }
+}
