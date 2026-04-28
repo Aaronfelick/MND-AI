@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MND KITS | NEO-RETRO FOOTBALL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mnd-blue': '#3D5FD9',
+                        'mnd-yellow': '#D4C000',
+                        'mnd-pink': '#D45FAB',
+                        'mnd-black': '#0A0A0A',
+                        'mnd-white': '#E8E8E0',
+                    },
+                    fontFamily: {
+                        'sans': ['Lexend', 'sans-serif'],
+                        'mono': ['Space Mono', 'monospace']
+                    },
+                    boxShadow: {
+                        'brutal': '4px 4px 0px 0px rgba(0,0,0,1)',
+                        'brutal-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
+                        'brutal-hover': '2px 2px 0px 0px rgba(0,0,0,1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ─── DARK MODE (default) ─── */
+        [data-theme="dark"] body {
+            background-color: #141414;
+            background-image: radial-gradient(rgba(255,255,255,0.12) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            color: #E8E8E0;
+        }
+        [data-theme="dark"] .theme-nav        { background: #1A1A1A; border-color: #0A0A0A; }
+        [data-theme="dark"] .theme-nav-text   { color: #E8E8E0; }
+        [data-theme="dark"] .theme-search-btn { border-color: rgba(255,255,255,0.4); color: #E8E8E0; }
+        [data-theme="dark"] .theme-hero-tag   { }
+        [data-theme="dark"] .theme-hero-h1    { color: #E8E8E0; }
+        [data-theme="dark"] .theme-hero-p     { color: #D1D5DB; border-color: #D4C000; }
+        [data-theme="dark"] .theme-story-btn  { background: #2A2A2A; color: #E8E8E0; border-color: rgba(255,255,255,0.5); }
+        [data-theme="dark"] .theme-img-card   { background: #1E1E1E; }
+        [data-theme="dark"] .theme-cat-section{ background: #1A1A1A; }
+        [data-theme="dark"] .theme-cat-h2     { color: #E8E8E0; }
+        [data-theme="dark"] .theme-cat-card   { background: #252525; border-color: rgba(255,255,255,0.2); }
+        [data-theme="dark"] .theme-cat-inner  { background: #333; border-color: rgba(255,255,255,0.15); }
+        [data-theme="dark"] .theme-cat-inner-text { color: #E8E8E0; }
+        [data-theme="dark"] .theme-cat-title  { color: #E8E8E0; }
+        [data-theme="dark"] .theme-cat-sub    { color: #9CA3AF; }
+        [data-theme="dark"] .theme-trending-h2{ color: #E8E8E0; }
+        [data-theme="dark"] .theme-trending-link { color: #E8E8E0; }
+        [data-theme="dark"] .theme-product-card { background: #1E1E1E; border-color: rgba(255,255,255,0.2); }
+        [data-theme="dark"] .theme-product-img-bg { background: #2A2A2A; border-color: rgba(0,0,0,0.3); }
+        [data-theme="dark"] .theme-product-inner { background: #1E1E1E; }
+        [data-theme="dark"] .theme-product-title { color: #E8E8E0; }
+        [data-theme="dark"] .theme-product-price { color: #D4C000; }
+        [data-theme="dark"] .theme-newsletter-input { background: #2A2A2A; color: #E8E8E0; border-color: rgba(255,255,255,0.3); }
+
+        /* Dark mode: knob LEFT (sun active) */
+        [data-theme="dark"] .toggle-track     { background: #2A2A2A; border-color: rgba(255,255,255,0.35); }
+        [data-theme="dark"] .toggle-knob      { transform: translateX(0px); background: #D4C000; }
+        [data-theme="dark"] .toggle-icon-sun  { opacity: 1;    color: #0A0A0A; }
+        [data-theme="dark"] .toggle-icon-moon { opacity: 0.35; color: #E8E8E0; }
+
+        /* ─── LIGHT MODE ─── */
+        [data-theme="light"] body {
+            background-color: #f0f0f0;
+            background-image: radial-gradient(#000 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            color: #0A0A0A;
+        }
+        [data-theme="light"] .theme-nav        { background: #FFFFFF; border-color: #0A0A0A; }
+        [data-theme="light"] .theme-nav-text   { color: #0A0A0A; }
+        [data-theme="light"] .theme-search-btn { border-color: #0A0A0A; color: #0A0A0A; }
+        [data-theme="light"] .theme-hero-h1    { color: #0A0A0A; }
+        [data-theme="light"] .theme-hero-p     { color: #111827; border-color: #0A0A0A; }
+        [data-theme="light"] .theme-story-btn  { background: #FFFFFF; color: #0A0A0A; border-color: #0A0A0A; }
+        [data-theme="light"] .theme-img-card   { background: #FFFFFF; }
+        [data-theme="light"] .theme-cat-section{ background: #F9E400; }
+        [data-theme="light"] .theme-cat-h2     { color: #0A0A0A; }
+        [data-theme="light"] .theme-cat-card   { background: #FFFFFF; border-color: #0A0A0A; }
+        [data-theme="light"] .theme-cat-inner  { background: #E5E7EB; border-color: #0A0A0A; }
+        [data-theme="light"] .theme-cat-inner-text { color: #0A0A0A; }
+        [data-theme="light"] .theme-cat-title  { color: #0A0A0A; }
+        [data-theme="light"] .theme-cat-sub    { color: #4B5563; }
+        [data-theme="light"] .theme-trending-h2{ color: #0A0A0A; }
+        [data-theme="light"] .theme-trending-link { color: #0A0A0A; }
+        [data-theme="light"] .theme-product-card { background: #FFFFFF; border-color: #0A0A0A; }
+        [data-theme="light"] .theme-product-img-bg { background: #F3F4F6; border-color: #0A0A0A; }
+        [data-theme="light"] .theme-product-inner { background: #FFFFFF; }
+        [data-theme="light"] .theme-product-title { color: #0A0A0A; }
+        [data-theme="light"] .theme-product-price { color: #0A0A0A; }
+        [data-theme="light"] .theme-newsletter-input { background: #FFFFFF; color: #0A0A0A; border-color: #0A0A0A; }
+
+        /* Light mode: knob RIGHT (moon active) */
+        [data-theme="light"] .toggle-track     { background: #e0e0e0; border-color: #0A0A0A; }
+        [data-theme="light"] .toggle-knob      { transform: translateX(34px); background: #0A0A0A; }
+        [data-theme="light"] .toggle-icon-sun  { opacity: 0.35; color: #0A0A0A; }
+        [data-theme="light"] .toggle-icon-moon { opacity: 1;    color: #E8E8E0; }
+
+        /* ─── SHARED ─── */
+        .brutal-border { border: 3px solid black; }
+        .brutal-btn {
+            border: 3px solid black;
+            padding: 0.5rem 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.15s;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .brutal-btn:active { box-shadow: none; transform: translate(4px,4px); }
+
+        .nav-link {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+            transition: color 0.2s;
+        }
+        .nav-link:hover { color: #3D5FD9; }
+
+        /* Smooth theme transitions */
+        body, nav, section, footer, div, h1, h2, h3, h4, p, span, a, input {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* ─── TOGGLE TRACK ─── */
+        .toggle-track {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 76px;
+            height: 38px;
+            border: 3px solid;
+            border-radius: 0; /* brutalist — keep it square */
+            cursor: pointer;
+            transition: background 0.3s, border-color 0.3s;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.85);
+            flex-shrink: 0;
+        }
+        .toggle-track:hover { box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.85); transform: translate(2px,2px); }
+        .toggle-track:active { box-shadow: none; transform: translate(4px,4px); }
+
+        .toggle-knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s;
+            z-index: 2;
+        }
+
+        .toggle-icon-sun,
+        .toggle-icon-moon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            transition: opacity 0.3s, color 0.3s;
+            z-index: 1;
+        }
+        .toggle-icon-sun  { left: 6px; }
+        .toggle-icon-moon { right: 6px; }
+
+        /* Sun spin on hover */
+        .toggle-track:hover .toggle-icon-sun svg {
+            animation: spin-slow 4s linear infinite;
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee { animation: marquee 15s linear infinite; }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <nav class="theme-nav sticky top-0 z-50 border-b-4 border-mnd-black p-4" style="border-bottom-color: #0A0A0A;">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="bg-mnd-blue p-2 brutal-border shadow-brutal">
+                    <span class="text-white font-black text-xl">MND</span>
+                </div>
+                <span class="theme-nav-text font-black text-2xl tracking-tighter uppercase hidden sm:block">Kits</span>
+            </div>
+
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link theme-nav-text">Shop All</a>
+                <a href="#" class="nav-link theme-nav-text">Retro Kits</a>
+                <a href="#" class="nav-link theme-nav-text">New Drops</a>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <!-- Search -->
+                <button class="theme-search-btn brutal-border p-2 hover:bg-mnd-pink transition-colors" style="border-width: 3px;">
+                    <i data-lucide="search" class="w-6 h-6"></i>
+                </button>
+
+                <!-- ☀/☾ Toggle -->
+                <div class="toggle-track" id="themeToggle" role="button" title="Toggle light/dark mode" tabindex="0">
+                    <!-- Sun icon — left side -->
+                    <span class="toggle-icon-sun">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="4"/>
+                            <line x1="12" y1="2" x2="12" y2="4"/>
+                            <line x1="12" y1="20" x2="12" y2="22"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="2" y1="12" x2="4" y2="12"/>
+                            <line x1="20" y1="12" x2="22" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                    </span>
+                    <!-- Moon icon — right side -->
+                    <span class="toggle-icon-moon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </span>
+                    <!-- Sliding knob -->
+                    <span class="toggle-knob"></span>
+                </div>
+
+                <!-- Cart -->
+                <button class="relative bg-mnd-yellow brutal-border p-2 shadow-brutal hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+                    <i data-lucide="shopping-cart" class="w-6 h-6 text-black"></i>
+                    <span class="absolute -top-2 -right-2 bg-black text-white text-xs font-bold px-1.5 brutal-border">2</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Marquee -->
+    <div class="bg-black text-white overflow-hidden py-2 border-b-4 border-black">
+        <div class="animate-marquee whitespace-nowrap flex space-x-12 items-center">
+            <span class="font-black italic uppercase tracking-widest text-lg">NEW ARRIVALS DROPPING SOON • </span>
+            <span class="font-black italic uppercase tracking-widest text-lg text-mnd-yellow">FREE SHIPPING ON ORDERS OVER AED 150 • </span>
+            <span class="font-black italic uppercase tracking-widest text-lg">NEW ARRIVALS DROPPING SOON • </span>
+            <span class="font-black italic uppercase tracking-widest text-lg text-mnd-yellow">FREE SHIPPING ON ORDERS OVER AED 150 • </span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="max-w-7xl mx-auto px-4 py-12 grid lg:grid-cols-2 gap-8 items-center">
+        <div class="order-2 lg:order-1 space-y-6">
+            <div class="bg-mnd-pink inline-block px-4 py-1 brutal-border shadow-brutal -rotate-2">
+                <span class="font-black uppercase italic text-black">The 2025/26 Collection</span>
+            </div>
+            <h1 class="theme-hero-h1 text-6xl md:text-8xl font-black leading-none uppercase tracking-tighter">
+                WEAR THE <span class="text-mnd-blue">HISTORY.</span>
+            </h1>
+            <div class="theme-hero-p border-l-4 pl-5 space-y-3">
+                <p class="text-lg font-bold leading-relaxed">
+                    Iconic kits don't just belong in history books — they belong on your back. We've captured the golden era of football and refined it for the modern eye, combining high-quality stitching with the raw emotion of the game's greatest moments.
+                </p>
+                <p class="text-lg font-bold leading-relaxed">
+                    Every kit is made with care to give you that authentic vintage weight and a fit that defines your style. Whether you're on the pitch or in the city, wear gear that never goes out of fashion.
+                </p>
+                <p class="text-lg font-black uppercase tracking-wide">
+                    Don't just follow the culture — <span class="text-mnd-blue">wear it.</span>
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-4 pt-4">
+                <button class="brutal-btn text-xl px-10 py-4 bg-mnd-blue text-white" style="box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);">Shop Now</button>
+                <button class="theme-story-btn brutal-btn text-xl px-10 py-4">Our Story</button>
+            </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+            <div class="relative">
+                <div class="theme-img-card brutal-border shadow-brutal-lg overflow-hidden rotate-2" style="box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);">
+                    <img src="Gemini_Generated_Image_t9yba5t9yba5t9yb.png" alt="Featured Jersey" class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500">
+                </div>
+                <div class="absolute -top-4 -right-4 w-24 h-24 bg-mnd-yellow brutal-border -z-10 animate-bounce opacity-80"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="theme-cat-section border-y-4 border-black py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="theme-cat-h2 text-4xl font-black uppercase mb-12 italic underline decoration-mnd-blue">Shop By Category</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <div class="theme-cat-card brutal-border p-6 shadow-brutal hover:translate-y-[-8px] transition-all cursor-pointer group">
+                    <div class="theme-cat-inner h-48 mb-4 brutal-border overflow-hidden">
+                        <div class="theme-cat-inner-text w-full h-full flex items-center justify-center font-black text-4xl group-hover:scale-125 transition-transform">RETRO</div>
+                    </div>
+                    <h3 class="theme-cat-title font-black text-2xl uppercase italic">Vintage Classics</h3>
+                    <p class="theme-cat-sub font-bold">90s & 00s Icons</p>
+                </div>
+
+                <div class="theme-cat-card brutal-border p-6 shadow-brutal hover:translate-y-[-8px] transition-all cursor-pointer group">
+                    <div class="h-48 bg-mnd-blue mb-4 brutal-border overflow-hidden">
+                        <div class="w-full h-full flex items-center justify-center font-black text-4xl text-white group-hover:scale-125 transition-transform">MODERN</div>
+                    </div>
+                    <h3 class="theme-cat-title font-black text-2xl uppercase italic">Current Season</h3>
+                    <p class="theme-cat-sub font-bold">2023/24 Releases</p>
+                </div>
+
+                <div class="theme-cat-card brutal-border p-6 shadow-brutal hover:translate-y-[-8px] transition-all cursor-pointer group">
+                    <div class="h-48 bg-mnd-pink mb-4 brutal-border overflow-hidden">
+                        <div class="w-full h-full flex items-center justify-center font-black text-4xl text-black group-hover:scale-125 transition-transform">LIMITED</div>
+                    </div>
+                    <h3 class="theme-cat-title font-black text-2xl uppercase italic">Custom Sets</h3>
+                    <p class="theme-cat-sub font-bold">MND Originals</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending -->
+    <section class="max-w-7xl mx-auto px-4 py-20">
+        <div class="flex justify-between items-end mb-12">
+            <h2 class="theme-trending-h2 text-4xl font-black uppercase">Trending Kits</h2>
+            <a href="#" class="theme-trending-link font-black uppercase underline decoration-4 decoration-mnd-blue">View all items</a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="group">
+                <div class="theme-product-card relative brutal-border shadow-brutal transition-all group-hover:shadow-brutal-lg group-hover:-translate-x-1 group-hover:-translate-y-1">
+                    <span class="absolute top-2 left-2 bg-mnd-yellow text-black font-bold text-xs px-2 py-1 brutal-border z-10 uppercase">New Drop</span>
+                    <div class="theme-product-img-bg aspect-square p-4 border-b-4 border-black flex items-center justify-center overflow-hidden">
+                        <img src="placeholder-jersey.png" class="w-full h-full object-contain group-hover:scale-110 transition-transform">
+                    </div>
+                    <div class="theme-product-inner p-4">
+                        <h4 class="theme-product-title font-black text-xl uppercase tracking-tighter">Retro Classic '98</h4>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="theme-product-price font-mono font-bold text-xl">$75.00</span>
+                            <button class="bg-mnd-yellow brutal-border p-2 shadow-brutal active:shadow-none active:translate-x-1 active:translate-y-1 transition-all">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white border-t-4 border-black py-16">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-12">
+            <div class="col-span-2">
+                <div class="bg-mnd-yellow inline-block p-4 brutal-border shadow-brutal mb-6">
+                    <span class="text-black font-black text-4xl uppercase italic">MND KITS</span>
+                </div>
+                <p class="text-xl font-bold max-w-md mb-8">Elevating football culture with premium vintage and modern gear. Join the club.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="bg-white p-3 brutal-border text-black hover:bg-mnd-blue hover:text-white transition-colors">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                    <a href="#" class="bg-white p-3 brutal-border text-black hover:bg-mnd-blue hover:text-white transition-colors">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="text-mnd-pink font-black uppercase text-xl mb-6 underline decoration-2">Explore</h5>
+                <ul class="space-y-4 font-bold">
+                    <li><a href="#" class="hover:text-mnd-yellow transition-colors">Collections</a></li>
+                    <li><a href="#" class="hover:text-mnd-yellow transition-colors">Track Order</a></li>
+                    <li><a href="#" class="hover:text-mnd-yellow transition-colors">Size Guide</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-mnd-blue font-black uppercase text-xl mb-6 underline decoration-2">Newsletter</h5>
+                <div class="flex">
+                    <input type="email" placeholder="YOUR@EMAIL.COM" class="theme-newsletter-input w-full brutal-border p-3 font-black uppercase focus:outline-none placeholder-gray-500">
+                    <button class="bg-mnd-yellow brutal-border p-3 ml-[-3px] shadow-brutal active:shadow-none transition-all">
+                        <i data-lucide="arrow-right" class="text-black"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t-2 border-white/20 text-center font-mono text-sm opacity-60">
+            © 2026 MND KITS • ALL RIGHTS RESERVED • BUILT FOR THE PITCH
+        </div>
+    </footer>
+
+        <style>
+        * { cursor: none !important; }
+        #football-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 19px; height: 19px;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            will-change: left, top;
+        }
+        #football-cursor.clicking {
+            animation: kick-spin 0.35s ease-out;
+        }
+        @keyframes kick-spin {
+            0%   { transform: translate(-50%, -50%) rotate(0deg)   scale(1);    }
+            40%  { transform: translate(-50%, -50%) rotate(180deg) scale(0.85); }
+            100% { transform: translate(-50%, -50%) rotate(360deg) scale(1);    }
+        }
+    </style>
+    <img id="football-cursor" src="data:image/png;base64,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" aria-hidden="true" alt="">
+    <script>
+        lucide.createIcons();
+
+        const html = document.documentElement;
+        const btn  = document.getElementById('themeToggle');
+
+        // Load saved preference
+        const saved = localStorage.getItem('mnd-theme') || 'dark';
+        html.setAttribute('data-theme', saved);
+
+        function toggle() {
+            const current = html.getAttribute('data-theme');
+            const next    = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('mnd-theme', next);
+        }
+
+        btn.addEventListener('click', toggle);
+        btn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') toggle(); });
+
+        // ── Football cursor ──
+        const ball = document.getElementById('football-cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            ball.style.left = e.clientX + 'px';
+            ball.style.top  = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => {
+            ball.classList.remove('clicking');
+            void ball.offsetWidth;
+            ball.classList.add('clicking');
+        });
+        ball.addEventListener('animationend', () => ball.classList.remove('clicking'));
+    </script>
+</body>
+</html>
