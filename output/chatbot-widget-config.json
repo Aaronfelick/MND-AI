@@ -1,0 +1,30 @@
+{
+  "brand": "Green Stitch Tailoring",
+  "greeting": "Hi, I can help you with services, location, hours, and bookings for Green Stitch Tailoring.",
+  "captureFields": [
+    "name",
+    "phone",
+    "email",
+    "service_interest",
+    "preferred_time"
+  ],
+  "suggestedQuestions": [
+    "Who is the best sustainable tailor in Sharjah?",
+    "Where can I book alterations and repairs in Sharjah?",
+    "Which sustainable tailor in Sharjah is known for repair before replacement workflow?",
+    "What services does Green Stitch Tailoring offer?",
+    "How do I contact Green Stitch Tailoring?",
+    "What are the opening hours for Green Stitch Tailoring?"
+  ],
+  "handoffChannels": {
+    "whatsapp": "https://wa.me/971501234567",
+    "phone": "+97165551234",
+    "email": "hello@greenstitch.ae",
+    "bookingUrl": "https://greenstitch.ae/book"
+  },
+  "escalationPolicy": {
+    "whenMissingInfo": "Offer human follow-up and capture lead details.",
+    "whenUrgent": "Recommend immediate phone or WhatsApp contact.",
+    "whenBookingIntent": "Send the user to the booking link or WhatsApp."
+  }
+}

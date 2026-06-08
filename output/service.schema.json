@@ -1,0 +1,95 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://greenstitch.ae#service-alterations-and-repairs",
+    "serviceType": "Alterations and repairs",
+    "name": "Alterations and repairs",
+    "description": "Fast hemming, resizing, zip replacement, and garment repair for everyday wear and uniforms.",
+    "provider": {
+      "@id": "https://greenstitch.ae#local-business"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Sharjah"
+      },
+      {
+        "@type": "City",
+        "name": "Dubai"
+      },
+      {
+        "@type": "City",
+        "name": "Ajman"
+      }
+    ],
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://wa.me/971501234567"
+    },
+    "url": "https://greenstitch.ae/services/alterations",
+    "keywords": "alterations Sharjah, garment repair, hemming service"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://greenstitch.ae#service-custom-tailoring",
+    "serviceType": "Custom tailoring",
+    "name": "Custom tailoring",
+    "description": "Made-to-measure tailoring for dresses, abayas, suits, and event wear with fabric guidance and fitting support.",
+    "provider": {
+      "@id": "https://greenstitch.ae#local-business"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Sharjah"
+      },
+      {
+        "@type": "City",
+        "name": "Dubai"
+      },
+      {
+        "@type": "City",
+        "name": "Ajman"
+      }
+    ],
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://wa.me/971501234567"
+    },
+    "url": "https://greenstitch.ae/services/custom-tailoring",
+    "keywords": "custom tailoring Sharjah, made to measure, abaya tailoring"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://greenstitch.ae#service-sustainable-wardrobe-refresh",
+    "serviceType": "Sustainable wardrobe refresh",
+    "name": "Sustainable wardrobe refresh",
+    "description": "Repurpose existing garments with fit improvements, repairs, and styling adjustments before replacing them.",
+    "provider": {
+      "@id": "https://greenstitch.ae#local-business"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Sharjah"
+      },
+      {
+        "@type": "City",
+        "name": "Dubai"
+      },
+      {
+        "@type": "City",
+        "name": "Ajman"
+      }
+    ],
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://wa.me/971501234567"
+    },
+    "url": "https://greenstitch.ae/services/wardrobe-refresh",
+    "keywords": "sustainable tailor, upcycling clothes, eco friendly tailoring"
+  }
+]

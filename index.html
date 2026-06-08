@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MND-AI | Local Business AEO + Chatbot Studio</title>
+    <meta
+      name="description"
+      content="Generate structured AEO schema and chatbot content packs for small local businesses in the UAE."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">MND-AI Launch Kit</span>
+          <h1>Build AI search visibility and website concierge bots for local businesses.</h1>
+          <p class="lead">
+            This starter kit turns one business profile into AEO-ready schema, answer-engine
+            briefs, and chatbot deployment content for local UAE service businesses.
+          </p>
+          <div class="hero-points">
+            <div class="hero-point">
+              <strong>AEO consultancy</strong>
+              <span>Structure business data so AI search engines can confidently cite the business.</span>
+            </div>
+            <div class="hero-point">
+              <strong>Hyper-local content bots</strong>
+              <span>Deploy concierge bots that answer questions, qualify leads, and route bookings.</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="metric-card">
+            <span class="metric-label">Ideal clients</span>
+            <strong>Clinics, gyms, cafes, salons, tailors, repair shops</strong>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Primary value</span>
+            <strong>More discovery, fewer missed leads, better on-site conversion</strong>
+          </div>
+          <div class="metric-card">
+            <span class="metric-label">Key outputs</span>
+            <strong>Schema, FAQ packs, bot prompts, knowledge base, lead handoff config</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="editor-panel">
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">Business profile editor</span>
+              <h2>Source of truth for each client</h2>
+            </div>
+            <div class="button-row">
+              <button id="load-sample-button" type="button">Load sample UAE business</button>
+              <button id="generate-button" type="button" class="primary">Generate assets</button>
+            </div>
+          </div>
+          <p class="helper-text">
+            Paste a business profile JSON object here. The tool will generate structured data,
+            answer-engine prompts, and chatbot deployment materials from the same input.
+          </p>
+          <textarea id="profile-input" spellcheck="false" aria-label="Business profile JSON"></textarea>
+          <p id="status" class="status" data-tone="neutral">
+            Loading sample business profile...
+          </p>
+        </section>
+
+        <section class="output-panel">
+          <div class="panel-header">
+            <div>
+              <span class="eyebrow">Generated deliverables</span>
+              <h2>AEO + chatbot asset pack</h2>
+            </div>
+          </div>
+          <div id="output" class="output-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./src/browser-app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://greenstitch.ae#website",
+  "url": "https://greenstitch.ae",
+  "name": "Green Stitch Tailoring",
+  "description": "Green Stitch Tailoring is a Sharjah-based tailoring studio focused on alterations, repairs, and custom fits using sustainable fabrics and low-waste production practices.",
+  "inLanguage": [
+    "English",
+    "Arabic"
+  ],
+  "publisher": {
+    "@id": "https://greenstitch.ae#organization"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://greenstitch.ae/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}

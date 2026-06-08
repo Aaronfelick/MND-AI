@@ -1,0 +1,31 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://greenstitch.ae#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you offer same-day alterations in Sharjah?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Selected alterations and repairs can be completed on the same day depending on garment type and current workload."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I book a fitting through WhatsApp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Customers can request a fitting or alteration appointment through WhatsApp, phone, or the booking page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes Green Stitch Tailoring sustainable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We prioritize repair before replacement, offer lower-waste alterations, and help customers extend the life of garments with fabric-conscious tailoring."
+      }
+    }
+  ]
+}
