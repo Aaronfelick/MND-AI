@@ -1,0 +1,33 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "Secure external-data chatbot backend and frontend.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aaronfelick/MND-AI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aaronfelick/MND-AI/issues"
+  },
+  "homepage": "https://github.com/Aaronfelick/MND-AI#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.102.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pdf-parse": "^2.4.5",
+    "read-excel-file": "^9.1.1"
+  },
+  "devDependencies": {
+    "write-excel-file": "^4.1.1"
+  }
+}
