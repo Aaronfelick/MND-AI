@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizBot V3</title>
+  <style>
+    :root {
+      --brand-navy: #1a1a2e;
+      --brand-red: #e94560;
+      --surface: #ffffff;
+      --page: #f8fafc;
+      --border: #e2e8f0;
+      --muted: #64748b;
+      --text: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--page);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+    }
+
+    .chat-widget {
+      width: min(100%, 560px);
+      height: min(760px, calc(100vh - 2rem));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--surface);
+      border-radius: 24px;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 1.15rem 1.35rem;
+      background: var(--brand-navy);
+      color: #fff;
+    }
+
+    .avatar,
+    .mini-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--brand-red);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      font-size: 15px;
+    }
+
+    .mini-avatar {
+      width: 30px;
+      height: 30px;
+      font-size: 11px;
+    }
+
+    .header-name {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .header-sub {
+      margin-top: 3px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .online-dot {
+      width: 9px;
+      height: 9px;
+      margin-left: auto;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.24);
+    }
+
+    .chat-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      overflow-y: auto;
+      padding: 1.35rem;
+      background: var(--page);
+      scroll-behavior: smooth;
+    }
+
+    .chat-body::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .chat-body::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    .bubble-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .bubble-row.user {
+      flex-direction: row-reverse;
+    }
+
+    .bubble {
+      max-width: 82%;
+      padding: 11px 15px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .bubble.bot {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 5px;
+    }
+
+    .bubble.user {
+      background: var(--brand-navy);
+      color: #fff;
+      border-bottom-right-radius: 5px;
+    }
+
+    .bubble.typing {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 10px 14px;
+      border-top: 1px solid #f1f5f9;
+      background: #fff;
+    }
+
+    .chip {
+      border: 0;
+      border-radius: 999px;
+      padding: 6px 13px;
+      background: #f1f5f9;
+      color: #475569;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      transition: background 0.15s, color 0.15s, transform 0.15s;
+    }
+
+    .chip:hover {
+      background: var(--brand-navy);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 14px;
+      border-top: 1px solid #f1f5f9;
+      background: #fff;
+    }
+
+    .chat-input {
+      flex: 1;
+      min-width: 0;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 11px 17px;
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .chat-input:focus {
+      border-color: var(--brand-navy);
+    }
+
+    .chat-input:disabled {
+      background: #f8fafc;
+      opacity: 0.65;
+    }
+
+    .send-btn {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 0;
+      border-radius: 50%;
+      background: var(--brand-navy);
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .send-btn:hover {
+      opacity: 0.86;
+      transform: translateY(-1px);
+    }
+
+    .send-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.35;
+      transform: none;
+    }
+
+    .send-btn svg {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .powered {
+      padding: 6px 0 8px;
+      background: #fff;
+      color: #cbd5e1;
+      font-size: 10.5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="chat-widget" aria-label="BizBot chat widget">
+    <header class="chat-header">
+      <div class="avatar" id="headerAvatar">SF</div>
+      <div>
+        <div class="header-name" id="headerName">Loading...</div>
+        <div class="header-sub" id="headerSub">Ask me anything about our services</div>
+      </div>
+      <div class="online-dot" aria-label="Online"></div>
+    </header>
+
+    <section class="chat-body" id="chatBody" aria-live="polite"></section>
+    <section class="suggestions" id="suggestions" aria-label="Suggested questions"></section>
+
+    <form class="input-row" id="chatForm">
+      <input
+        class="chat-input"
+        id="chatInput"
+        type="text"
+        autocomplete="off"
+        placeholder="Type your question..."
+        aria-label="Message"
+      />
+      <button class="send-btn" id="sendBtn" type="submit" aria-label="Send message">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+
+    <div class="powered">Powered by AI</div>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
