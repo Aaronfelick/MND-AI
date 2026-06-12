@@ -14,7 +14,7 @@ const heroVisual = document.getElementById('heroVisual');
 
 const COLORS = {
   light: { body: 0xf4f2ec, panel: 0xeae7df, joint: 0x35353c, screen: 0x121216 },
-  dark:  { body: 0x32323a, panel: 0x2a2a31, joint: 0x4d4d56, screen: 0x0a0a0e }
+  dark:  { body: 0x3c3c46, panel: 0x34343c, joint: 0x55555f, screen: 0x0a0a0e }
 };
 const ACCENT = 0xff5c2b;
 
@@ -70,11 +70,11 @@ function init() {
 
   // Chest recess + glowing core
   const chestScreen = new THREE.Mesh(new RoundedBoxGeometry(1.0, 0.9, 0.14, 4, 0.06), screenMat);
-  chestScreen.position.set(0, 0.02, 0.5);
+  chestScreen.position.set(0, 0.02, 0.48);
   robot.add(chestScreen);
 
   const core = new THREE.Mesh(new THREE.IcosahedronGeometry(0.21, 1), coreMat);
-  core.position.set(0, 0.02, 0.56);
+  core.position.set(0, 0.02, 0.45);
   robot.add(core);
   const coreHalo = new THREE.Mesh(new THREE.IcosahedronGeometry(0.3, 1), new THREE.MeshBasicMaterial({
     color: ACCENT, transparent: true, opacity: 0.25
@@ -88,7 +88,7 @@ function init() {
   // Chest panel doors (hinged at outer edges, swing open to reveal the core)
   function makeDoor(side) { // side: -1 left, +1 right
     const hinge = new THREE.Group();
-    hinge.position.set(side * 0.53, 0.02, 0.52);
+    hinge.position.set(side * 0.53, 0.02, 0.62);
     const door = new THREE.Mesh(new RoundedBoxGeometry(0.52, 0.92, 0.1, 4, 0.05), panelMat);
     door.position.x = -side * 0.26;
     hinge.add(door);
@@ -306,7 +306,7 @@ function init() {
     doorR.rotation.y =  open * 1.85;
     const corePulse = 1 + Math.sin(t * 6) * 0.08;
     core.scale.setScalar((0.85 + open * 0.55) * corePulse);
-    coreHalo.scale.setScalar((0.8 + open * 0.9) * corePulse);
+    coreHalo.scale.setScalar((0.7 + open * 1.0) * corePulse);
     coreHalo.material.opacity = 0.12 + open * 0.3;
     core.rotation.y = t * 1.6;
     core.rotation.x = t * 0.9;
