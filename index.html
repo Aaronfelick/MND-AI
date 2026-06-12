@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizBot — AI Chatbots for Real Businesses</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="splash-container" id="splashScreen">
+  <div class="splash-bg-glow"></div>
+  <div class="splash-logo">
+    Biz<span>Bot</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    Biz<span>Bot</span>
+  </div>
+  <div class="nav-right-container">
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a onclick="showPage('how')" id="nav-how">How It Works</a></li>
+      <li><a onclick="showPage('pricing')" id="nav-pricing">Pricing</a></li>
+      <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+      <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
+      <li><a onclick="showPage('contact')" id="nav-contact" class="nav-cta">Get Started</a></li>
+    </ul>
+    
+    <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
+
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('home');toggleMenu()">Home</a>
+  <a onclick="showPage('how');toggleMenu()">How It Works</a>
+  <a onclick="showPage('pricing');toggleMenu()">Pricing</a>
+  <a onclick="showPage('about');toggleMenu()">About</a>
+  <a onclick="showPage('faq');toggleMenu()">FAQ</a>
+  <a onclick="showPage('contact');toggleMenu()">Get Started</a>
+</div>
+
+
+<div class="page active" id="page-home">
+
+  <!-- ════ CINEMATIC FULL-SCREEN HERO — robot flies through this and the story panels below ════ -->
+  <div class="hero-cine" id="heroVisual">
+    <div class="hero-glow"></div>
+    <div class="hero-grid-lines"></div>
+
+    <!-- 3D robot stage: fixed to the viewport on desktop so the robot travels with you while scrolling -->
+    <div class="robot-stage" id="robotStage">
+      <canvas id="robotCanvas" aria-label="Animated 3D BizBot robot"></canvas>
+    </div>
+
+    <div class="hero-cine-content">
+      <div class="hero-badge">● Now available for UAE businesses</div>
+      <h1 class="hero-mega">
+        <span class="line">Chatbots that</span>
+        <span class="line">actually <em>know</em></span>
+        <span class="line stroke">your business</span>
+      </h1>
+    </div>
+
+    <div class="hero-chip c1">⚡ Live in 48 hours</div>
+    <div class="hero-chip c2">🌍 English + العربية</div>
+    <div class="hero-chip c3">💬 Answers 24/7</div>
+    <div class="hero-chip c4">✓ Zero made-up info</div>
+
+    <div class="hero-cine-bottom">
+      <p>Stop losing customers to generic "please contact us" responses. AI assistants trained on your exact services, prices, and policies.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('contact')">Get your chatbot →</button>
+        <button class="btn-ghost" onclick="showPage('how')">See how it works</button>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><span class="wheel"></span>Scroll to meet him</div>
+  </div>
+
+  <!-- ════ SCROLL STORY — three full-height panels the robot flies between ════ -->
+  <section class="story-panel">
+    <div class="story-inner">
+      <div class="story-text align-left">
+        <span class="story-num">01</span>
+        <h2>Trained on <em>your</em> exact business</h2>
+        <p>Your prices, your services, your policies. The bot answers only from what you give it — no made-up information, ever. If it doesn't know, it says so and hands over your contact details.</p>
+        <div class="story-chips"><span>Your prices</span><span>Your policies</span><span>Your FAQs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-panel">
+    <div class="story-inner">
+      <div class="story-text align-right">
+        <span class="story-num">02</span>
+        <h2>English & العربية — <em>automatically</em></h2>
+        <p>It detects the language your customer writes in and replies fluently in the same one, while remembering the whole conversation. "What about express?" after a shipping question just works.</p>
+        <div class="story-chips"><span>Auto language detect</span><span>Context memory</span><span>Natural follow-ups</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-panel">
+    <div class="story-inner story-split">
+      <div class="story-text">
+        <span class="story-num">03</span>
+        <h2>Live on your site in <em>48 hours</em></h2>
+        <p>One line of code. Works on WordPress, Wix, Shopify, or custom HTML. Here's one handling a real customer right now — watch it type.</p>
+        <button class="btn-primary" onclick="showPage('contact')">Start today →</button>
+      </div>
+      <div class="chat-mockup demo">
+        <div class="mock-header">
+          <div class="mock-av">🚚</div>
+          <div><div class="mock-hname">SwiftFreight Assistant</div><div class="mock-hsub">Powered by BizBot</div></div>
+          <div class="mock-online"></div>
+        </div>
+        <div class="mock-body" id="demoBody"></div>
+        <div class="mock-footer">
+          <div class="mock-input">Ask anything...</div>
+          <div class="mock-sendbtn"><svg width="12" height="12" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ INFINITE MARQUEE TRUST STRIP ════ -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>FreightCo</span><i>✦</i><span>Al Noor Clinic</span><i>✦</i><span>Desert Tours</span><i>✦</i><span>Gulf Parts</span><i>✦</i><span>Marina Retail</span><i>✦</i>
+      <span>FreightCo</span><i>✦</i><span>Al Noor Clinic</span><i>✦</i><span>Desert Tours</span><i>✦</i><span>Gulf Parts</span><i>✦</i><span>Marina Retail</span><i>✦</i>
+    </div>
+  </div>
+
+  <section style="background: var(--cream);">
+    <div class="section-inner">
+      <span class="section-tag">Simple process</span>
+      <h2 class="section-title">Up and running in 3 steps</h2>
+      <p class="section-sub">No tech team needed. You give us your business info, we handle everything else.</p>
+      <div class="steps">
+        <div class="step-card" data-reveal>
+          <div class="step-num">01</div>
+          <div class="step-icon">📋</div>
+          <h3>You brief us</h3>
+          <p>Fill out a simple form with your services, prices, policies, and FAQs. The more detail the better — takes about 20 minutes.</p>
+        </div>
+        <div class="step-card" data-reveal>
+          <div class="step-num">02</div>
+          <div class="step-icon">⚙️</div>
+          <h3>We build it</h3>
+          <p>We configure your AI assistant, train it on your business data, style it to match your brand, and test it thoroughly.</p>
+        </div>
+        <div class="step-card" data-reveal>
+          <div class="step-num">03</div>
+          <div class="step-icon">🚀</div>
+          <h3>It goes live</h3>
+          <p>You get a single line of code to paste into your website. Done. Your chatbot is live and answering customers 24/7.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <span class="section-tag">Why BizBot</span>
+      <h2 class="section-title">Not just another chatbot</h2>
+      <p class="section-sub">Most chatbots are glorified FAQs. BizBot understands context, remembers the conversation, and gives real answers.</p>
+      <div class="features-grid">
+        <div class="feature-card" data-reveal>
+          <div class="feature-icon">🧠</div>
+          <div>
+            <h3>Trained on your exact data</h3>
+            <p>Your prices, your services, your policies. The bot only answers from what you give it — no made-up information.</p>
+          </div>
+        </div>
+        <div class="feature-card" data-reveal>
+          <div class="feature-icon">💬</div>
+          <div>
+            <h3>Remembers the conversation</h3>
+            <p>Customers can ask follow-up questions naturally. "What about express?" after asking about shipping just works.</p>
+          </div>
+        </div>
+        <div class="feature-card" data-reveal>
+          <div class="feature-icon">🌍</div>
+          <div>
+            <h3>Arabic & English</h3>
+            <p>Your customers speak both. BizBot responds fluently in whichever language they use, automatically.</p>
+          </div>
+        </div>
+        <div class="feature-card" data-reveal>
+          <div class="feature-icon">📱</div>
+          <div>
+            <h3>Works on any website</h3>
+            <p>One line of code. Works on WordPress, Wix, Shopify, custom HTML — anything with a website.</p>
+          </div>
+        </div>
+        <div class="feature-card" data-reveal>
+          <div class="feature-icon">🎨</div>
+          <div>
+            <h3>Fully branded</h3>
+            <p>Custom colours, your logo, your bot's name. Looks like it was built in-house — because your customers will never know.</p>
+          </div>
+        </div>
+        <div class="feature-card" data-reveal>
+          <div class="feature-icon">🔄</div>
+          <div>
+            <h3>Updates anytime</h3>
+            <p>Changed your prices? New service? Just send us the update and your bot reflects it within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--cream);">
+    <div class="section-inner">
+      <span class="section-tag">Reviews</span>
+      <h2 class="section-title">What our clients say</h2>
+      <div class="testi-grid">
+        <div class="testi-card" data-reveal>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Our old chatbot would just say 'call us for pricing.' BizBot actually tells customers what it costs. Our WhatsApp enquiries dropped 40% because the bot answers it all."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:#0f4c81;">AK</div>
+            <div><div class="testi-name">Ahmed Khalil</div><div class="testi-role">SwiftFreight UAE</div></div>
+          </div>
+        </div>
+        <div class="testi-card" data-reveal>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"We run a medical clinic. Patients used to call to ask if we accept their insurance. Now the bot handles all of that. Our receptionist can focus on actual patients."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:#1a3c34;">DR</div>
+            <div><div class="testi-name">Dr. Rania Mansour</div><div class="testi-role">Al Noor Medical Centre</div></div>
+          </div>
+        </div>
+        <div class="testi-card" data-reveal>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Was live in two days. The setup was simple — I just sent them a document with all our tour packages and prices. Worth every dirham."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="background:#7c3c1a;">SM</div>
+            <div><div class="testi-name">Sara Mirza</div><div class="testi-role">Desert Explorer Tours</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>Ready to stop losing customers to silence?</h2>
+    <p>Get a chatbot that actually knows your business. Setup takes 48 hours.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Start today — free consultation →</button>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Biz<span>Bot</span></div>
+          <p class="footer-desc">AI chatbots built specifically for your business. No generic responses. No missed questions. Just answers.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a onclick="showPage('how')">How It Works</a>
+          <a onclick="showPage('pricing')">Pricing</a>
+          <a onclick="showPage('faq')">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a onclick="showPage('about')">About Us</a>
+          <a onclick="showPage('contact')">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a>hello@bizbot.ae</a>
+          <a>+971 50 000 0000</a>
+          <a>Dubai, UAE</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 BizBot. All rights reserved.</p>
+        <p>Built in Dubai 🇦🇪</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<div class="page" id="page-how">
+  <section>
+    <div class="section-inner" style="max-width:800px;">
+      <span class="section-tag">The process</span>
+      <h2 class="section-title">How BizBot works</h2>
+      <p class="section-sub">From first contact to live chatbot — here's exactly what happens and what you need to do.</p>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <div class="process-content">
+            <h3>You fill out the onboarding form</h3>
+            <p>We send you a simple document to fill in — your business name, what you do, your services, prices, opening hours, contact details, and any frequently asked questions. No technical knowledge needed. Think of it as briefing a new employee.</p>
+            <div class="process-tip">💡 Tip: The more specific you are with prices and details, the better your bot performs. "Delivery costs 50 AED" beats "delivery costs something."</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <div class="process-content">
+            <h3>We configure your AI assistant</h3>
+            <p>Our team loads your business data into the AI, sets the personality and tone (formal, friendly, casual — your choice), matches the colours and branding to your website, and names the bot whatever you like.</p>
+            <div class="process-tip">💡 Tip: We can set the bot to respond in English, Arabic, or both automatically depending on which language the customer uses.</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <div class="process-content">
+            <h3>We test it thoroughly</h3>
+            <p>Before anything goes live, we test the bot with 50+ realistic customer questions to make sure it's answering correctly and gracefully handling things it doesn't know. You also get to test it and request changes.</p>
+            <div class="process-tip">💡 Tip: Send us the most common questions your customers actually ask — we'll make sure every single one is covered.</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <div class="process-content">
+            <h3>It goes live on your website</h3>
+            <p>You receive a single line of HTML code to paste into your website — anywhere in the page. The chat bubble appears in the corner. That's it. Works on WordPress, Wix, Shopify, or any custom website.</p>
+            <div class="process-tip">💡 Tip: If you're not comfortable adding code yourself, just send us your website login and we'll do it for you — no extra charge.</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">05</div>
+          <div class="process-content">
+            <h3>Ongoing updates and support</h3>
+            <p>Prices changed? New service launched? Just WhatsApp or email us the update and we'll reflect it in your bot within 24 hours. Monthly subscribers also get performance reports showing the most common questions asked.</p>
+            <div class="process-tip">💡 Tip: We recommend reviewing your bot's common questions monthly — it often reveals things customers want to know that aren't on your website at all.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--cream);">
+    <div class="section-inner" style="text-align:center;">
+      <h2 class="section-title">Still have questions?</h2>
+      <p class="section-sub" style="margin: 0 auto 2rem;">Check our FAQ or get in touch — we respond within a few hours.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="showPage('faq')">Read the FAQ →</button>
+        <button class="btn-secondary" onclick="showPage('contact')">Talk to us</button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <p>© 2026 BizBot. All rights reserved.</p>
+        <div style="display:flex;gap:1.5rem;">
+          <a style="color:rgba(255,255,255,0.45);cursor:pointer;font-size:13px;" onclick="showPage('home')">Home</a>
+          <a style="color:rgba(255,255,255,0.45);cursor:pointer;font-size:13px;" onclick="showPage('pricing')">Pricing</a>
+          <a style="color:rgba(255,255,255,0.45);cursor:pointer;font-size:13px;" onclick="showPage('contact')">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<div class="page" id="page-pricing">
+  <section>
+    <div class="section-inner">
+      <div class="pricing-hero" style="padding:0 0 1rem;">
+        <span class="section-tag">Pricing</span>
+        <h2 class="section-title">Simple, transparent pricing</h2>
+        <p class="section-sub" style="margin: 0 auto;">No hidden fees. No long contracts. Cancel anytime.</p>
+        <div class="pricing-toggle">
+          <button class="toggle-btn active" id="tog-monthly" onclick="togglePricing('monthly')">Monthly</button>
+          <button class="toggle-btn" id="tog-annual" onclick="togglePricing('annual')">Annual <span style="color:var(--accent);font-size:11px;"> save 20%</span></button>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-name">Starter</div>
+          <div class="plan-desc">Perfect for small businesses just getting started with AI customer service.</div>
+          <div class="plan-price">
+            <span class="currency">AED</span><span class="amount" id="price-starter">299</span><span class="period"> /month</span>
+          </div>
+          <ul class="plan-features">
+            <li>1 chatbot</li>
+            <li>Up to 500 conversations/month</li>
+            <li>English + Arabic</li>
+            <li>Custom branding & colours</li>
+            <li>Knowledge base up to 5,000 words</li>
+            <li>Email support</li>
+            <li>48-hour setup</li>
+            <li class="no">Monthly analytics report</li>
+            <li class="no">Priority updates</li>
+            <li class="no">WhatsApp integration</li>
+          </ul>
+          <button class="btn-secondary" style="width:100%;" onclick="showPage('contact')">Get started</button>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="popular-badge">Most popular</div>
+          <div class="plan-name">Growth</div>
+          <div class="plan-desc">For growing businesses that need more conversations and deeper insights.</div>
+          <div class="plan-price">
+            <span class="currency">AED</span><span class="amount" id="price-growth">699</span><span class="period"> /month</span>
+          </div>
+          <ul class="plan-features">
+            <li>1 chatbot</li>
+            <li>Up to 2,000 conversations/month</li>
+            <li>English + Arabic</li>
+            <li>Custom branding & colours</li>
+            <li>Knowledge base up to 20,000 words</li>
+            <li>WhatsApp + website</li>
+            <li>Monthly analytics report</li>
+            <li>24-hour updates</li>
+            <li>Priority email & WhatsApp support</li>
+            <li class="no">Multiple chatbots</li>
+          </ul>
+          <button class="btn-primary" style="width:100%;" onclick="showPage('contact')">Get started</button>
+        </div>
+
+        <div class="pricing-card">
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-desc">For larger businesses or agencies needing multiple bots and full customisation.</div>
+          <div class="plan-price">
+            <span class="currency">AED</span><span class="amount" id="price-enterprise">1,499</span><span class="period"> /month</span>
+          </div>
+          <ul class="plan-features">
+            <li>Up to 5 chatbots</li>
+            <li>Unlimited conversations</li>
+            <li>English + Arabic + custom</li>
+            <li>Full white-label (no BizBot branding)</li>
+            <li>Unlimited knowledge base</li>
+            <li>All integrations</li>
+            <li>Weekly analytics report</li>
+            <li>Same-day updates</li>
+            <li>Dedicated account manager</li>
+            <li>Custom API integration</li>
+          </ul>
+          <button class="btn-secondary" style="width:100%;" onclick="showPage('contact')">Contact us</button>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:1.5rem;padding:1rem;background:var(--cream);border-radius:10px;font-size:13.5px;color:var(--mid);">
+        All plans include a one-time setup fee of <strong style="color:var(--black);">AED 499</strong> — waived for annual subscribers.
+      </div>
+
+      <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-top:4rem;margin-bottom:0.5rem;">Full comparison</h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Starter</th>
+            <th>Growth</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Monthly conversations</td><td>500</td><td>2,000</td><td>Unlimited</td></tr>
+          <tr><td>Number of chatbots</td><td>1</td><td>1</td><td>Up to 5</td></tr>
+          <tr><td>Arabic & English</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Custom branding</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>White-label (no BizBot logo)</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✓</td></tr>
+          <tr><td>Website embed</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>WhatsApp integration</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Monthly analytics report</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Knowledge base size</td><td>5K words</td><td>20K words</td><td>Unlimited</td></tr>
+          <tr><td>Update turnaround</td><td>48 hrs</td><td>24 hrs</td><td>Same day</td></tr>
+          <tr><td>Support channel</td><td>Email</td><td>Email + WA</td><td>Dedicated</td></tr>
+          <tr><td>Setup fee</td><td>AED 499</td><td>AED 499</td><td>AED 499</td></tr>
+          <tr><td>Setup fee (annual)</td><td class="check">Waived</td><td class="check">Waived</td><td class="check">Waived</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>Not sure which plan is right?</h2>
+    <p>Book a free 20-minute call and we'll recommend the best fit for your business.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book a free call →</button>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <p>© 2026 BizBot. All rights reserved.</p>
+        <div style="display:flex;gap:1.5rem;">
+          <a style="color:rgba(255,255,255,0.45);cursor:pointer;font-size:13px;" onclick="showPage('home')">Home</a>
+          <a style="color:rgba(255,255,255,0.45);cursor:pointer;font-size:13px;" onclick="showPage('faq')">FAQ</a>
+          <a style="color:rgba(255,255,255,0.45);cursor:pointer;font-size:13px;" onclick="showPage('contact')">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<div class="page" id="page-about">
+  <section>
+    <div class="section-inner">
+      <div class="about-hero" style="padding:0 0 3rem;">
+        <span class="section-tag">Our story</span>
+        <h2 class="section-title">Built out of frustration</h2>
+        <p class="section-sub" style="margin:0 auto;">We were the customers who kept hitting "please contact us for pricing." So we fixed it.</p>
+      </div>
+
+      <div class="about-story">
+        <p>BizBot started when we kept running into the same problem: visiting a business website, having a genuine question, and getting a chatbot that either said nothing useful or redirected us to a phone number. <strong>The technology existed to do better</strong> — it just wasn't being applied properly.</p>
+        <p>Most chatbot companies sell you a platform and leave you to figure it out. They give you a builder, some templates, and a support ticket system. You end up with something that answers "what are your opening hours?" and nothing else.</p>
+        <p>We took a different approach. <strong>We treat every client's chatbot as a dedicated project</strong> — not a self-serve SaaS signup. We learn your business, we configure the AI properly, we test it against real customer questions, and we stay involved after it goes live.</p>
+        <p>We're based in Dubai and built specifically for UAE businesses — we understand the bilingual nature of customer interactions here, the industries that matter (freight, hospitality, retail, healthcare, real estate), and the expectation of fast, responsive service.</p>
+      </div>
+
+      <div style="margin-top:3.5rem;">
+        <span class="section-tag">What we believe</span>
+        <h2 class="section-title" style="margin-bottom:0;">Our values</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🎯</div>
+          <h3>Specificity over generality</h3>
+          <p>A chatbot that knows one business extremely well is 10x more useful than one that knows everything vaguely.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>We stay involved</h3>
+          <p>We're not a platform you buy and forget. We're a service partner. Your bot gets better over time because we keep working on it.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔍</div>
+          <h3>Honest about limitations</h3>
+          <p>AI isn't magic. We'll tell you what it can and can't do well for your business — before you pay us anything.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:3.5rem;">
+        <span class="section-tag">The team</span>
+        <h2 class="section-title" style="margin-bottom:0;">Who's behind BizBot</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-av" style="background:var(--accent);">AD</div>
+          <h3>Aaron felick D'souza</h3>
+          <div class="role">Founder & CEO</div>
+          <p>Spotted the gap in the market after years of frustrating chatbot experiences. Leads client relationships and product direction.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-av" style="background:#0f4c81;">JN</div>
+          <h3>Joshua Nunes</h3>
+          <div class="role">CoFounder & CFO</div>
+          <p>Builds and fine-tunes every chatbot. Former tech consultant. Obsessed with making AI actually useful, not just impressive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>Want to work with us?</h2>
+    <p>We take on a limited number of new clients each month to keep quality high.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Get in touch →</button>
+  </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <p>© 2026 BizBot. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<div class="page" id="page-faq">
+  <section>
+    <div class="section-inner">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">Frequently asked questions</h2>
+      <p class="section-sub">Everything you need to know before getting started.</p>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Do I need any technical knowledge to use BizBot?</div>
+          <div class="faq-a">None at all. You fill in a document with your business information — same as you would for any other service. We handle all the technical setup. To add it to your website, you paste one line of code, or we do it for you.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How is this different from Intercom or Tidio?</div>
+          <div class="faq-a">Those are platforms you configure yourself. BizBot is a done-for-you service — we build, test, and manage the bot on your behalf. We're also specifically built for UAE businesses, with Arabic support and local industry knowledge built in.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What if the bot gives a wrong answer?</div>
+          <div class="faq-a">The bot only answers from the information you give us — it won't make things up. If something is not in its knowledge base, it says "I don't have that information, please contact us" and provides your contact details. If you spot an incorrect answer during or after testing, we fix it immediately.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Can the bot speak Arabic?</div>
+          <div class="faq-a">Yes. All plans include Arabic and English support. The bot detects which language the customer is using and responds in the same language automatically. No configuration needed.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What websites does it work on?</div>
+          <div class="faq-a">Any website. WordPress, Wix, Shopify, Squarespace, custom HTML — if you can paste a line of code, it works. If you can't, we access your website and add it for you.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How long does setup take?</div>
+          <div class="faq-a">48 hours from when you submit your business information. That includes configuration, testing, and delivery of the embed code. Complex setups (multiple languages, large knowledge bases) may take up to 72 hours.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What happens when I need to update the bot?</div>
+          <div class="faq-a">Just WhatsApp or email us the changes. Price change, new service, new policy — anything. We update it within 24 hours on Growth plans and same-day on Enterprise. Starter plans are updated within 48 hours.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Is there a contract or minimum commitment?</div>
+          <div class="faq-a">No long-term contract. Monthly plans can be cancelled with 30 days notice. Annual plans offer a 20% discount and the setup fee is waived.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Can I see a demo before committing?</div>
+          <div class="faq-a">Yes. Book a free 20-minute call and we'll show you a live demo using a business similar to yours. You can ask it real questions and see exactly how it performs.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What counts as a "conversation"?</div>
+          <div class="faq-a">One conversation = one complete chat session with a customer, regardless of how many messages are exchanged. A customer who sends 10 messages in one session counts as 1 conversation.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Is my business data safe?</div>
+          <div class="faq-a">Yes. Your business information is only used to power your bot — it is never shared with other clients or used for any other purpose. We do not store customer conversations beyond what is needed for analytics.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:3rem;padding:2rem;background:var(--cream);border-radius:14px;text-align:center;">
+        <p style="font-size:15px;margin-bottom:1rem;color:var(--mid);">Didn't find your answer?</p>
+        <button class="btn-primary" onclick="showPage('contact')">Ask us directly →</button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <p>© 2026 BizBot. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<div class="page" id="page-contact">
+  <section>
+    <div class="section-inner">
+      <span class="section-tag">Get in touch</span>
+      <h2 class="section-title">Let's talk about your business</h2>
+      <p class="section-sub">Fill in the form and we'll get back to you within a few hours. Or just WhatsApp us directly.</p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>How we can help</h3>
+          <p>Whether you want to discuss a specific use case, see a demo, or just understand if this is right for your business — we're happy to talk. No hard sell, no pressure.</p>
+
+          <div class="contact-item">
+            <div class="contact-item-icon">💬</div>
+            <div>
+              <h4>WhatsApp (fastest)</h4>
+              <p>+971 50 000 0000 — usually reply within 1–2 hours</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📧</div>
+            <div>
+              <h4>Email</h4>
+              <p>hello@bizbot.ae — reply within same business day</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <h4>Location</h4>
+              <p>Dubai, UAE (we work with businesses across the GCC)</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div>
+              <h4>Hours</h4>
+              <p>Sun–Thu 9am–6pm UAE time</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div id="formSuccess" class="form-success">
+            ✅ Message sent! We'll get back to you within a few hours.
+          </div>
+          <div class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your name *</label>
+                <input type="text" id="fname" placeholder="Ahmed Al-Rashidi" />
+              </div>
+              <div class="form-group">
+                <label>Business name *</label>
+                <input type="text" id="fbiz" placeholder="SwiftFreight UAE" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email address *</label>
+              <input type="email" id="femail" placeholder="ahmed@yourcompany.com" />
+            </div>
+            <div class="form-group">
+              <label>WhatsApp number</label>
+              <input type="tel" id="fphone" placeholder="+971 50 123 4567" />
+            </div>
+            <div class="form-group">
+              <label>What does your business do?</label>
+              <input type="text" id="findustry" placeholder="e.g. Freight logistics, Medical clinic, Real estate..." />
+            </div>
+            <div class="form-group">
+              <label>Which plan interests you?</label>
+              <select id="fplan">
+                <option value="">Not sure yet</option>
+                <option>Starter — AED 299/month</option>
+                <option>Growth — AED 699/month</option>
+                <option>Enterprise — AED 1,499/month</option>
+                <option>I'd like a free demo first</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Anything else you'd like us to know?</label>
+              <textarea id="fmsg" placeholder="Tell us about your main challenge, how many enquiries you get, what you'd want the bot to handle..."></textarea>
+            </div>
+            <button class="btn-primary" style="width:100%;padding:14px;" onclick="submitForm()">Send message →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none;padding-top:0;">
+        <p>© 2026 BizBot. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<script>
+// ── SPA FRONT-END ROUTING INTERFACES ──
+let currentPage = 'home';
+function showPage(name) {
+  currentPage = name;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateNavStyle();
+}
+
+// ── NAV TRANSPARENCY OVER THE CINEMATIC HERO ──
+function updateNavStyle() {
+  // The dark cinematic region spans the hero plus the three story panels
+  // (~4 viewport heights), so the nav stays transparent through all of it.
+  const nav = document.querySelector('nav');
+  const overHero = currentPage === 'home' && window.scrollY < window.innerHeight * 3.7;
+  nav.classList.toggle('over-hero', overHero);
+}
+window.addEventListener('scroll', updateNavStyle, { passive: true });
+
+// ── MOBILE NAVIGATION PANEL INTERACTION CONTROLLER ──
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ── SUBSCRIPTION MATRIX CALCULATION PRICING TOGGLES ──
+const prices = {
+  monthly:  { starter: '299',   growth: '699',   enterprise: '1,499' },
+  annual:   { starter: '239',   growth: '559',   enterprise: '1,199' }
+};
+function togglePricing(type) {
+  document.getElementById('tog-monthly').classList.toggle('active', type === 'monthly');
+  document.getElementById('tog-annual').classList.toggle('active', type === 'annual');
+  document.getElementById('price-starter').textContent    = prices[type].starter;
+  document.getElementById('price-growth').textContent     = prices[type].growth;
+  document.getElementById('price-enterprise').textContent = prices[type].enterprise;
+}
+
+// ── FAQ TOGGLE DROP ACCORDION ACTIONS ──
+function toggleFaq(el) {
+  el.parentElement.classList.toggle('open');
+}
+
+// ── DATA INTAKE FORM SUBMISSION CONTROLLERS ──
+function submitForm() {
+  const name  = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const biz   = document.getElementById('fbiz').value.trim();
+  if (!name || !email || !biz) {
+    alert('Please fill in your name, business name, and email address.');
+    return;
+  }
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── DYNAMIC CONFIGURATION THEME TOGGLES ──
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  if (currentTheme === 'dark') {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
+// ── SCROLL-REVEAL OBSERVER (cards fade up as they enter the viewport) ──
+function initReveals() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+}
+
+// ── LIVE TYPING CHAT DEMO (story panel 03, loops forever) ──
+const demoScript = [
+  { who: 'bot',  text: "Hi! I can help with shipping rates, booking, and delivery times. What do you need?" },
+  { who: 'user', text: "How much to ship 20kg to Riyadh?" },
+  { who: 'bot',  text: "For 20kg to Riyadh, that's our GCC rate — roughly 200–360 AED by air. Transit is 2–4 business days. Want to book?" },
+  { who: 'user', text: "Yes — book it for Sunday please 🙌" },
+  { who: 'bot',  text: "Done! Pickup scheduled Sunday 10am–1pm. You'll get a WhatsApp confirmation shortly. Anything else?" }
+];
+function runChatDemo() {
+  const body = document.getElementById('demoBody');
+  if (!body) return;
+  let i = 0;
+  function next() {
+    if (i >= demoScript.length) {
+      setTimeout(() => { body.innerHTML = ''; i = 0; setTimeout(next, 700); }, 4000);
+      return;
+    }
+    const m = demoScript[i];
+    const bubble = document.createElement('div');
+    bubble.className = 'mock-msg ' + m.who + ' typing';
+    bubble.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(bubble);
+    body.scrollTop = body.scrollHeight;
+    setTimeout(() => {
+      bubble.classList.remove('typing');
+      bubble.innerHTML = '';
+      bubble.textContent = m.text;
+      body.scrollTop = body.scrollHeight;
+      i++;
+      setTimeout(next, 1000 + Math.random() * 600);
+    }, m.who === 'bot' ? 1200 : 800);
+  }
+  next();
+}
+
+// Persistent Memory Prefetch Session Handler & Splash Screen Timeout Removal
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  updateNavStyle();
+  initReveals();
+  runChatDemo();
+
+  // Safely terminates splash overlay node from DOM tree structure after animation cycles complete
+  setTimeout(() => {
+    const splash = document.getElementById('splashScreen');
+    if(splash) splash.remove();
+  }, 3500);
+});
+</script>
+
+<!-- ── 3D HERO ROBOT (Three.js, classic scripts so it also works when opening the file directly) ── -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/geometries/RoundedBoxGeometry.js"></script>
+<script src="robot.js"></script>
+</body>
+</html>
