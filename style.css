@@ -451,116 +451,346 @@ section {
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
 /* ==========================================================================
-   4B. 3D HERO ROBOT STAGE (THREE.JS SHOWPIECE)
+   4B. CINEMATIC FULL-SCREEN HERO + SCROLL STORY (3D SHOWPIECE)
+   The robot lives on a fixed, full-viewport canvas and flies between the
+   hero and the three story panels as the user scrolls.
    ========================================================================== */
-.hero-visual {
-  min-height: 560px;
-}
+#page-home { padding-top: 0; }
 
-.robot-stage {
+.hero-cine {
   position: relative;
-  width: 100%;
-  height: 560px;
-  z-index: 1;
+  height: 100vh;
+  min-height: 680px;
+  background: #0b0b0e;
+  color: #fff;
+  overflow: hidden;
 }
 
-.robot-stage canvas {
+.hero-glow {
   position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-  cursor: grab;
-}
-
-/* Warm ambient halo sitting behind the robot */
-.robot-glow {
-  position: absolute;
-  top: 48%; left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 440px; height: 440px;
+  width: 620px; height: 620px;
   background: radial-gradient(circle, rgba(255, 92, 43, 0.22) 0%, rgba(255, 92, 43, 0) 70%);
-  filter: blur(36px);
+  filter: blur(50px);
   border-radius: 50%;
   pointer-events: none;
   animation: robotGlowPulse 5s ease-in-out infinite;
   z-index: 0;
 }
 @keyframes robotGlowPulse {
-  0%, 100% { opacity: 0.85; transform: translate(-50%, -50%) scale(1); }
-  50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.12); }
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
 }
 
-.robot-hint {
+/* Faint perspective floor grid at the bottom of the hero */
+.hero-grid-lines {
   position: absolute;
-  bottom: 6px;
-  right: 8px;
-  font-size: 11px;
-  color: var(--mid);
-  opacity: 0.7;
+  left: 0; right: 0; bottom: 0;
+  height: 36vh;
+  z-index: 0;
+  background:
+    linear-gradient(to top, rgba(255, 92, 43, 0.06), transparent),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 90px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.05) 0 1px, transparent 1px 90px);
+  -webkit-mask-image: linear-gradient(to top, black 30%, transparent);
+  mask-image: linear-gradient(to top, black 30%, transparent);
   pointer-events: none;
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 999px;
-  transition: background 0.3s, border-color 0.3s;
 }
 
-/* Compact chat card tucked beside the robot */
-.chat-mockup.mini {
+/* Fixed full-viewport 3D stage — the robot travels with the scroll */
+.robot-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+.robot-stage canvas {
   position: absolute;
-  width: 250px;
-  bottom: -16px;
-  left: -34px;
-  z-index: 3;
-  transform: rotate(-2.5deg);
-  animation: floatCard 4.5s ease-in-out infinite;
-}
-.chat-mockup.mini .mock-body { padding: 12px; gap: 8px; }
-.chat-mockup.mini .mock-msg { font-size: 11.5px; max-width: 88%; }
-.chat-mockup.mini:hover {
-  transform: rotate(0deg) translateY(-8px) scale(1.02);
-  animation-play-state: paused;
-}
-@keyframes floatCard {
-  0%, 100% { margin-bottom: 0; }
-  50%      { margin-bottom: 10px; }
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 
-/* Floating tags repositioned around the robot stage */
-.hero-visual .float-tag { z-index: 4; }
-.hero-visual .float-tag.t1 { top: 8px; right: -8px; }
-.hero-visual .float-tag.t2 { bottom: 140px; right: -16px; left: auto; }
+/* Giant display typography behind the robot */
+.hero-cine-content {
+  position: absolute;
+  top: 12vh;
+  left: 0; right: 0;
+  text-align: center;
+  z-index: 2;
+  padding: 0 1.5rem;
+}
+.hero-cine-content .hero-badge { margin-bottom: 1.75rem; }
+.hero-cine-content .hero-badge::before { content: none; }
 
-/* WebGL fallback — hide the stage, restore the full-size chat mockup */
-.hero-visual.no-3d .robot-stage,
-.hero-visual.no-3d .robot-hint { display: none; }
-.hero-visual.no-3d { min-height: unset; }
-.hero-visual.no-3d .chat-mockup.mini {
-  position: static;
+.hero-mega {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 8.5vw, 7rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.hero-mega .line { display: block; }
+.hero-mega em { font-style: normal; color: var(--accent); }
+.hero-mega .stroke {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.65);
+}
+
+/* Floating glass info chips around the robot */
+.hero-chip {
+  position: absolute;
+  z-index: 6;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: 999px;
+  animation: float 3.4s ease-in-out infinite;
+  white-space: nowrap;
+}
+.hero-chip.c1 { top: 31vh;    left: 7vw;  }
+.hero-chip.c2 { top: 47vh;    right: 6vw; animation-delay: 0.8s; }
+.hero-chip.c3 { bottom: 31vh; left: 10vw; animation-delay: 1.6s; }
+.hero-chip.c4 { bottom: 25vh; right: 9vw; animation-delay: 2.4s; }
+
+.hero-cine-bottom {
+  position: absolute;
+  bottom: 8.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  text-align: center;
+  max-width: 600px;
+  width: calc(100% - 3rem);
+}
+.hero-cine-bottom p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+.hero-cine-bottom .hero-btns { justify-content: center; }
+
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.2s, color 0.2s, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+.scroll-cue {
+  position: absolute;
+  bottom: 1.8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+.scroll-cue .wheel {
+  width: 20px; height: 32px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  position: relative;
+}
+.scroll-cue .wheel::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 50%;
+  width: 3px; height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+  animation: wheelScroll 1.8s ease-in-out infinite;
+}
+@keyframes wheelScroll {
+  0%   { opacity: 1; transform: translateY(0); }
+  70%  { opacity: 0; transform: translateY(11px); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
+/* Transparent nav while over the dark hero */
+nav.over-hero {
+  background: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+}
+nav.over-hero .nav-logo { color: #fff; }
+nav.over-hero .nav-links a { color: rgba(255, 255, 255, 0.65); }
+nav.over-hero .nav-links a:hover,
+nav.over-hero .nav-links a.active { color: #fff; }
+nav.over-hero .nav-cta { background: var(--accent); color: #fff !important; }
+nav.over-hero .theme-toggle-btn { border-color: rgba(255, 255, 255, 0.25); color: #fff; }
+nav.over-hero .theme-toggle-btn:hover { background: rgba(255, 255, 255, 0.1); }
+nav.over-hero .hamburger span { background: #fff; }
+
+/* ── Scroll story panels (the robot flies between these) ── */
+.story-panel {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #0b0b0e;
+  color: #fff;
+  padding: 5rem 2rem;
+  position: relative;
+}
+.story-inner {
+  max-width: 1100px;
+  margin: 0 auto;
   width: 100%;
-  transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
-  animation: none;
+  position: relative;
+  z-index: 2;
 }
-.hero-visual.no-3d .float-tag.t2 { bottom: 20px; left: -20px; right: auto; }
+.story-text { max-width: 480px; }
+.story-text.align-right { margin-left: auto; }
+
+.story-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  line-height: 1;
+  display: block;
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
+}
+.story-text h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+.story-text h2 em { font-style: normal; color: var(--accent); }
+.story-text p {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.story-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.story-chips span {
+  border: 1px solid rgba(255, 92, 43, 0.45);
+  background: rgba(255, 92, 43, 0.08);
+  color: #ffb89e;
+  font-size: 12.5px;
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+.story-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.story-split .story-text { max-width: none; }
+
+/* Dark live-typing chat demo card (always dark — it sits on the dark panel) */
+.chat-mockup.demo {
+  transform: none;
+  width: 100%;
+  max-width: 420px;
+  justify-self: end;
+  background: #17171b;
+  border-color: #2a2a31;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+.chat-mockup.demo:hover { transform: translateY(-6px); }
+.chat-mockup.demo .mock-body { background: #101014; height: 300px; overflow-y: auto; }
+.chat-mockup.demo .mock-msg.bot { background: #1f1f25; border-color: #2e2e35; color: #e2e8f0; }
+.chat-mockup.demo .mock-msg.user { background: var(--accent); color: #fff; }
+.chat-mockup.demo .mock-footer { background: #17171b; border-color: #2a2a31; }
+.chat-mockup.demo .mock-input { background: #101014; border-color: #2a2a31; color: #777; }
+
+/* Typing indicator dots */
+.mock-msg.typing { display: flex; gap: 4px; align-items: center; min-height: 19px; }
+.mock-msg.typing span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: typingDot 1s infinite;
+}
+.mock-msg.typing span:nth-child(2) { animation-delay: 0.15s; }
+.mock-msg.typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typingDot {
+  0%, 100% { transform: translateY(0);    opacity: 0.35; }
+  50%      { transform: translateY(-4px); opacity: 0.9; }
+}
+
+/* ── Scroll-reveal animations ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+[data-reveal].in { opacity: 1; transform: none; }
+.steps > [data-reveal]:nth-child(2),
+.features-grid > [data-reveal]:nth-child(2),
+.testi-grid > [data-reveal]:nth-child(2) { transition-delay: 0.12s; }
+.steps > [data-reveal]:nth-child(3),
+.features-grid > [data-reveal]:nth-child(3),
+.testi-grid > [data-reveal]:nth-child(3) { transition-delay: 0.24s; }
+.features-grid > [data-reveal]:nth-child(4) { transition-delay: 0.12s; }
+.features-grid > [data-reveal]:nth-child(5) { transition-delay: 0.24s; }
+.features-grid > [data-reveal]:nth-child(6) { transition-delay: 0.36s; }
 
 /* ==========================================================================
-   5. CLIENT TRUST STRIP BAR
+   5. CLIENT TRUST STRIP — INFINITE MARQUEE
    ========================================================================== */
-.logos-strip {
+.marquee {
+  overflow: hidden;
   background: var(--cream);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 1.5rem 2rem;
-  text-align: center;
+  padding: 1.4rem 0;
   transition: background 0.3s, border-color 0.3s;
 }
-.logos-strip p { font-size: 12px; color: var(--mid); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em; }
-.logos-row { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; }
-.logo-item { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: #b0aea9; transition: color 0.3s ease, transform 0.3s ease; }
-.logo-item:hover { color: var(--accent); transform: scale(1.08); }
-[data-theme="dark"] .logo-item { color: #555555; }
-[data-theme="dark"] .logo-item:hover { color: var(--accent); }
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+  width: max-content;
+  animation: marqueeMove 26s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: #b0aea9;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.marquee-track span:hover { color: var(--accent); }
+[data-theme="dark"] .marquee-track span { color: #555555; }
+.marquee-track i { color: var(--accent); font-style: normal; font-size: 12px; }
+@keyframes marqueeMove { to { transform: translateX(-50%); } }
 
 /* ==========================================================================
    6. STEPS COMPONENT CONTAINER (3D INTERACTIVE CARD EXTENSION)
@@ -925,7 +1155,6 @@ footer {
   .theme-toggle-btn { order: 1; }
   
   .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
-  .hero-visual { order: -1; min-height: unset; }
   .chat-mockup { transform: none; }
   
   .steps, .features-grid, .testi-grid, .pricing-grid, .values-grid, .team-grid { grid-template-columns: 1fr; }
@@ -936,17 +1165,19 @@ footer {
   .process-step { grid-template-columns: 48px 1fr; gap: 1rem; }
   .process-num { font-size: 40px; }
 
-  /* Robot stage stacks above the text, chat card flows below it */
-  .robot-stage { height: 360px; }
-  .robot-glow { width: 300px; height: 300px; }
-  .robot-hint { display: none; }
-  .chat-mockup.mini {
-    position: static;
-    width: 100%;
-    margin-top: 1rem;
-    transform: none;
-    animation: none;
-  }
-  .hero-visual .float-tag.t1 { top: -8px; right: 0; }
-  .hero-visual .float-tag.t2 { display: none; }
+  /* Cinematic hero on small screens: robot stays inside the hero and
+     scrolls away naturally; the scroll-flight keyframes are disabled in JS */
+  .robot-stage { position: absolute; inset: 0; }
+  .hero-cine { min-height: 620px; }
+  .hero-cine-content { top: 14vh; }
+  .hero-mega { font-size: clamp(2.2rem, 11vw, 3.4rem); }
+  .hero-chip { display: none; }
+  .hero-cine-bottom { bottom: 7vh; }
+  .hero-cine-bottom p { font-size: 13.5px; }
+  .scroll-cue { display: none; }
+
+  .story-panel { min-height: unset; padding: 4rem 1.5rem; }
+  .story-text, .story-text.align-right { max-width: none; margin-left: 0; }
+  .story-split { grid-template-columns: 1fr; gap: 2.5rem; }
+  .chat-mockup.demo { justify-self: stretch; max-width: none; }
 }

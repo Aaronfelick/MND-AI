@@ -56,54 +56,92 @@
 
 <div class="page active" id="page-home">
 
-  <div class="hero">
-    <div class="hero-text">
-      <div class="hero-badge">Now available for UAE businesses</div>
-      <h1>Chatbots that actually <em>know</em> your business</h1>
-      <p>Stop losing customers to generic "please contact us" responses. BizBot builds AI assistants trained on your exact services, prices, and policies — live on your website in 48 hours.</p>
+  <!-- ════ CINEMATIC FULL-SCREEN HERO — robot flies through this and the story panels below ════ -->
+  <div class="hero-cine" id="heroVisual">
+    <div class="hero-glow"></div>
+    <div class="hero-grid-lines"></div>
+
+    <!-- 3D robot stage: fixed to the viewport on desktop so the robot travels with you while scrolling -->
+    <div class="robot-stage" id="robotStage">
+      <canvas id="robotCanvas" aria-label="Animated 3D BizBot robot"></canvas>
+    </div>
+
+    <div class="hero-cine-content">
+      <div class="hero-badge">● Now available for UAE businesses</div>
+      <h1 class="hero-mega">
+        <span class="line">Chatbots that</span>
+        <span class="line">actually <em>know</em></span>
+        <span class="line stroke">your business</span>
+      </h1>
+    </div>
+
+    <div class="hero-chip c1">⚡ Live in 48 hours</div>
+    <div class="hero-chip c2">🌍 English + العربية</div>
+    <div class="hero-chip c3">💬 Answers 24/7</div>
+    <div class="hero-chip c4">✓ Zero made-up info</div>
+
+    <div class="hero-cine-bottom">
+      <p>Stop losing customers to generic "please contact us" responses. AI assistants trained on your exact services, prices, and policies.</p>
       <div class="hero-btns">
         <button class="btn-primary" onclick="showPage('contact')">Get your chatbot →</button>
-        <button class="btn-secondary" onclick="showPage('how')">See how it works</button>
+        <button class="btn-ghost" onclick="showPage('how')">See how it works</button>
       </div>
     </div>
-    <div class="hero-visual" id="heroVisual">
-      <div class="float-tag t1">⚡ Live in 48 hours</div>
-      <div class="float-tag t2">✓ Answers real questions</div>
 
-      <!-- 3D animated robot stage -->
-      <div class="robot-stage" id="robotStage">
-        <div class="robot-glow"></div>
-        <canvas id="robotCanvas" aria-label="Animated 3D BizBot robot"></canvas>
-        <div class="robot-hint">Move your mouse — he's watching 👀</div>
+    <div class="scroll-cue"><span class="wheel"></span>Scroll to meet him</div>
+  </div>
+
+  <!-- ════ SCROLL STORY — three full-height panels the robot flies between ════ -->
+  <section class="story-panel">
+    <div class="story-inner">
+      <div class="story-text align-left">
+        <span class="story-num">01</span>
+        <h2>Trained on <em>your</em> exact business</h2>
+        <p>Your prices, your services, your policies. The bot answers only from what you give it — no made-up information, ever. If it doesn't know, it says so and hands over your contact details.</p>
+        <div class="story-chips"><span>Your prices</span><span>Your policies</span><span>Your FAQs</span></div>
       </div>
+    </div>
+  </section>
 
-      <div class="chat-mockup mini">
+  <section class="story-panel">
+    <div class="story-inner">
+      <div class="story-text align-right">
+        <span class="story-num">02</span>
+        <h2>English & العربية — <em>automatically</em></h2>
+        <p>It detects the language your customer writes in and replies fluently in the same one, while remembering the whole conversation. "What about express?" after a shipping question just works.</p>
+        <div class="story-chips"><span>Auto language detect</span><span>Context memory</span><span>Natural follow-ups</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-panel">
+    <div class="story-inner story-split">
+      <div class="story-text">
+        <span class="story-num">03</span>
+        <h2>Live on your site in <em>48 hours</em></h2>
+        <p>One line of code. Works on WordPress, Wix, Shopify, or custom HTML. Here's one handling a real customer right now — watch it type.</p>
+        <button class="btn-primary" onclick="showPage('contact')">Start today →</button>
+      </div>
+      <div class="chat-mockup demo">
         <div class="mock-header">
           <div class="mock-av">🚚</div>
           <div><div class="mock-hname">SwiftFreight Assistant</div><div class="mock-hsub">Powered by BizBot</div></div>
           <div class="mock-online"></div>
         </div>
-        <div class="mock-body">
-          <div class="mock-msg bot">Hi! I can help with shipping rates, booking, and delivery times. What do you need?</div>
-          <div class="mock-msg user">How much to ship 20kg to Riyadh?</div>
-          <div class="mock-msg bot">For 20kg to Riyadh, that's our GCC rate — roughly 200–360 AED by air. Transit is 2–4 business days. Want to book?</div>
-        </div>
+        <div class="mock-body" id="demoBody"></div>
         <div class="mock-footer">
           <div class="mock-input">Ask anything...</div>
           <div class="mock-sendbtn"><svg width="12" height="12" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="logos-strip">
-    <p>Trusted by businesses across the UAE</p>
-    <div class="logos-row">
-      <div class="logo-item">FreightCo</div>
-      <div class="logo-item">Al Noor Clinic</div>
-      <div class="logo-item">Desert Tours</div>
-      <div class="logo-item">Gulf Parts</div>
-      <div class="logo-item">Marina Retail</div>
+  <!-- ════ INFINITE MARQUEE TRUST STRIP ════ -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>FreightCo</span><i>✦</i><span>Al Noor Clinic</span><i>✦</i><span>Desert Tours</span><i>✦</i><span>Gulf Parts</span><i>✦</i><span>Marina Retail</span><i>✦</i>
+      <span>FreightCo</span><i>✦</i><span>Al Noor Clinic</span><i>✦</i><span>Desert Tours</span><i>✦</i><span>Gulf Parts</span><i>✦</i><span>Marina Retail</span><i>✦</i>
     </div>
   </div>
 
@@ -113,19 +151,19 @@
       <h2 class="section-title">Up and running in 3 steps</h2>
       <p class="section-sub">No tech team needed. You give us your business info, we handle everything else.</p>
       <div class="steps">
-        <div class="step-card">
+        <div class="step-card" data-reveal>
           <div class="step-num">01</div>
           <div class="step-icon">📋</div>
           <h3>You brief us</h3>
           <p>Fill out a simple form with your services, prices, policies, and FAQs. The more detail the better — takes about 20 minutes.</p>
         </div>
-        <div class="step-card">
+        <div class="step-card" data-reveal>
           <div class="step-num">02</div>
           <div class="step-icon">⚙️</div>
           <h3>We build it</h3>
           <p>We configure your AI assistant, train it on your business data, style it to match your brand, and test it thoroughly.</p>
         </div>
-        <div class="step-card">
+        <div class="step-card" data-reveal>
           <div class="step-num">03</div>
           <div class="step-icon">🚀</div>
           <h3>It goes live</h3>
@@ -141,42 +179,42 @@
       <h2 class="section-title">Not just another chatbot</h2>
       <p class="section-sub">Most chatbots are glorified FAQs. BizBot understands context, remembers the conversation, and gives real answers.</p>
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-reveal>
           <div class="feature-icon">🧠</div>
           <div>
             <h3>Trained on your exact data</h3>
             <p>Your prices, your services, your policies. The bot only answers from what you give it — no made-up information.</p>
           </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-reveal>
           <div class="feature-icon">💬</div>
           <div>
             <h3>Remembers the conversation</h3>
             <p>Customers can ask follow-up questions naturally. "What about express?" after asking about shipping just works.</p>
           </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-reveal>
           <div class="feature-icon">🌍</div>
           <div>
             <h3>Arabic & English</h3>
             <p>Your customers speak both. BizBot responds fluently in whichever language they use, automatically.</p>
           </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-reveal>
           <div class="feature-icon">📱</div>
           <div>
             <h3>Works on any website</h3>
             <p>One line of code. Works on WordPress, Wix, Shopify, custom HTML — anything with a website.</p>
           </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-reveal>
           <div class="feature-icon">🎨</div>
           <div>
             <h3>Fully branded</h3>
             <p>Custom colours, your logo, your bot's name. Looks like it was built in-house — because your customers will never know.</p>
           </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-reveal>
           <div class="feature-icon">🔄</div>
           <div>
             <h3>Updates anytime</h3>
@@ -192,7 +230,7 @@
       <span class="section-tag">Reviews</span>
       <h2 class="section-title">What our clients say</h2>
       <div class="testi-grid">
-        <div class="testi-card">
+        <div class="testi-card" data-reveal>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">"Our old chatbot would just say 'call us for pricing.' BizBot actually tells customers what it costs. Our WhatsApp enquiries dropped 40% because the bot answers it all."</p>
           <div class="testi-author">
@@ -200,7 +238,7 @@
             <div><div class="testi-name">Ahmed Khalil</div><div class="testi-role">SwiftFreight UAE</div></div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-reveal>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">"We run a medical clinic. Patients used to call to ask if we accept their insurance. Now the bot handles all of that. Our receptionist can focus on actual patients."</p>
           <div class="testi-author">
@@ -208,7 +246,7 @@
             <div><div class="testi-name">Dr. Rania Mansour</div><div class="testi-role">Al Noor Medical Centre</div></div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card" data-reveal>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">"Was live in two days. The setup was simple — I just sent them a document with all our tour packages and prices. Worth every dirham."</p>
           <div class="testi-author">
@@ -714,14 +752,25 @@
 
 <script>
 // ── SPA FRONT-END ROUTING INTERFACES ──
+let currentPage = 'home';
 function showPage(name) {
+  currentPage = name;
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   const navEl = document.getElementById('nav-' + name);
   if (navEl) navEl.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateNavStyle();
 }
+
+// ── NAV TRANSPARENCY OVER THE CINEMATIC HERO ──
+function updateNavStyle() {
+  const nav = document.querySelector('nav');
+  const overHero = currentPage === 'home' && window.scrollY < window.innerHeight * 0.7;
+  nav.classList.toggle('over-hero', overHero);
+}
+window.addEventListener('scroll', updateNavStyle, { passive: true });
 
 // ── MOBILE NAVIGATION PANEL INTERACTION CONTROLLER ──
 function toggleMenu() {
@@ -772,13 +821,65 @@ function toggleTheme() {
   }
 }
 
+// ── SCROLL-REVEAL OBSERVER (cards fade up as they enter the viewport) ──
+function initReveals() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+}
+
+// ── LIVE TYPING CHAT DEMO (story panel 03, loops forever) ──
+const demoScript = [
+  { who: 'bot',  text: "Hi! I can help with shipping rates, booking, and delivery times. What do you need?" },
+  { who: 'user', text: "How much to ship 20kg to Riyadh?" },
+  { who: 'bot',  text: "For 20kg to Riyadh, that's our GCC rate — roughly 200–360 AED by air. Transit is 2–4 business days. Want to book?" },
+  { who: 'user', text: "Yes — book it for Sunday please 🙌" },
+  { who: 'bot',  text: "Done! Pickup scheduled Sunday 10am–1pm. You'll get a WhatsApp confirmation shortly. Anything else?" }
+];
+function runChatDemo() {
+  const body = document.getElementById('demoBody');
+  if (!body) return;
+  let i = 0;
+  function next() {
+    if (i >= demoScript.length) {
+      setTimeout(() => { body.innerHTML = ''; i = 0; setTimeout(next, 700); }, 4000);
+      return;
+    }
+    const m = demoScript[i];
+    const bubble = document.createElement('div');
+    bubble.className = 'mock-msg ' + m.who + ' typing';
+    bubble.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(bubble);
+    body.scrollTop = body.scrollHeight;
+    setTimeout(() => {
+      bubble.classList.remove('typing');
+      bubble.innerHTML = '';
+      bubble.textContent = m.text;
+      body.scrollTop = body.scrollHeight;
+      i++;
+      setTimeout(next, 1000 + Math.random() * 600);
+    }, m.who === 'bot' ? 1200 : 800);
+  }
+  next();
+}
+
 // Persistent Memory Prefetch Session Handler & Splash Screen Timeout Removal
 document.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
-  
+
+  updateNavStyle();
+  initReveals();
+  runChatDemo();
+
   // Safely terminates splash overlay node from DOM tree structure after animation cycles complete
   setTimeout(() => {
     const splash = document.getElementById('splashScreen');

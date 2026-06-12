@@ -1,22 +1,25 @@
 // ============================================================================
 // BIZBOT 3D HERO ROBOT — Three.js animated mascot
-// Floating robot with mouse tracking, blinking eyes, waving arm and a chest
-// panel that opens to reveal a glowing AI core. Falls back to the static chat
-// mockup if WebGL or the Three.js CDN is unavailable.
 //
-// Loaded as a classic script (no modules) so it works when index.html is
-// opened directly from disk as well as from a web server.
+// The robot lives on a fixed full-viewport canvas behind the cinematic home
+// hero. As the user scrolls through the hero and the three story panels, the
+// robot flies between scroll keyframes (centre → right → left → centre spin-
+// out) like the Spline-style showcase sites, then fades away.
+//
+// It also tracks the mouse, blinks, waves, and opens its chest panels to
+// reveal a glowing AI core. Falls back to hiding the stage if WebGL or the
+// Three.js CDN is unavailable. Loaded as a classic script (no modules) so it
+// works when index.html is opened directly from disk.
 // ============================================================================
 
 (function () {
 
   const stage  = document.getElementById('robotStage');
   const canvas = document.getElementById('robotCanvas');
-  const heroVisual = document.getElementById('heroVisual');
 
   function disable3d(reason) {
     console.warn('BizBot 3D robot disabled:', reason);
-    if (heroVisual) heroVisual.classList.add('no-3d');
+    if (stage) stage.style.display = 'none';
   }
 
   if (!stage || !canvas) return;
@@ -25,15 +28,9 @@
     return;
   }
 
-  const COLORS = {
-    light: { body: 0xf4f2ec, panel: 0xeae7df, joint: 0x35353c, screen: 0x121216 },
-    dark:  { body: 0x3c3c46, panel: 0x34343c, joint: 0x55555f, screen: 0x0a0a0e }
-  };
+  // Single palette tuned for the dark cinematic backdrop
+  const PALETTE = { body: 0xf4f2ec, panel: 0xe8e5dc, joint: 0x3a3a42, screen: 0x121216 };
   const ACCENT = 0xff5c2b;
-
-  function isDarkMode() {
-    return document.documentElement.getAttribute('data-theme') === 'dark';
-  }
 
   try {
     init();
@@ -49,32 +46,34 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 50);
-    camera.position.set(0, 0.55, 8.2);
-    camera.lookAt(0, 0.15, 0);
+    camera.position.set(0, 0.4, 8.4);
+    camera.lookAt(0, 0, 0);
 
-    // ── Lights ──
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x778899, 0.9);
+    // ── Lights (tuned for dark background) ──
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x1a1a22, 0.85);
     scene.add(hemi);
     const key = new THREE.DirectionalLight(0xffffff, 1.0);
     key.position.set(3, 5, 4);
     scene.add(key);
-    const warm = new THREE.PointLight(ACCENT, 0.7, 12);
+    const warm = new THREE.PointLight(ACCENT, 1.0, 14);
     warm.position.set(-2.5, 0.5, 3);
     scene.add(warm);
 
     // ── Materials ──
-    const bodyMat   = new THREE.MeshStandardMaterial({ color: COLORS.light.body,  roughness: 0.38, metalness: 0.15 });
-    const panelMat  = new THREE.MeshStandardMaterial({ color: COLORS.light.panel, roughness: 0.45, metalness: 0.12 });
-    const jointMat  = new THREE.MeshStandardMaterial({ color: COLORS.light.joint, roughness: 0.5,  metalness: 0.35 });
-    const screenMat = new THREE.MeshStandardMaterial({ color: COLORS.light.screen, roughness: 0.25, metalness: 0.1 });
+    const bodyMat   = new THREE.MeshStandardMaterial({ color: PALETTE.body,  roughness: 0.38, metalness: 0.15 });
+    const panelMat  = new THREE.MeshStandardMaterial({ color: PALETTE.panel, roughness: 0.45, metalness: 0.12 });
+    const jointMat  = new THREE.MeshStandardMaterial({ color: PALETTE.joint, roughness: 0.5,  metalness: 0.35 });
+    const screenMat = new THREE.MeshStandardMaterial({ color: PALETTE.screen, roughness: 0.25, metalness: 0.1 });
     const accentMat = new THREE.MeshStandardMaterial({ color: ACCENT, roughness: 0.4, metalness: 0.1 });
     const eyeMat    = new THREE.MeshBasicMaterial({ color: 0xffffff });
     const coreMat   = new THREE.MeshBasicMaterial({ color: ACCENT });
     const glowMat   = new THREE.MeshBasicMaterial({ color: 0xffa07a });
 
-    // ── Robot assembly ──
+    // ── Scene graph: root carries the scroll keyframes, robot bobs inside it ──
+    const root = new THREE.Group();
+    scene.add(root);
     const robot = new THREE.Group();
-    scene.add(robot);
+    root.add(robot);
 
     // Torso
     const torso = new THREE.Mesh(new THREE.RoundedBoxGeometry(1.55, 1.5, 1.05, 5, 0.3), bodyMat);
@@ -195,7 +194,7 @@
     thrusterLight.position.y = -1.5;
     robot.add(thrusterLight);
 
-    // Orbit ring with three satellites (techy accent around the bot)
+    // Orbit ring with three satellites (travels with the robot)
     const ring = new THREE.Group();
     const ringMesh = new THREE.Mesh(
       new THREE.TorusGeometry(2.05, 0.012, 8, 80),
@@ -210,38 +209,24 @@
     }
     ring.rotation.x = Math.PI / 2.25;
     ring.position.y = -0.1;
-    scene.add(ring);
+    root.add(ring);
 
-    // Soft ground shadow (radial gradient canvas texture)
-    const shadowCanvas = document.createElement('canvas');
-    shadowCanvas.width = shadowCanvas.height = 128;
-    const sctx = shadowCanvas.getContext('2d');
-    const grad = sctx.createRadialGradient(64, 64, 4, 64, 64, 64);
-    grad.addColorStop(0, 'rgba(0,0,0,0.34)');
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    sctx.fillStyle = grad;
-    sctx.fillRect(0, 0, 128, 128);
-    const shadow = new THREE.Mesh(
-      new THREE.PlaneGeometry(2.6, 2.6),
-      new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(shadowCanvas), transparent: true })
+    // Warm light pool under the robot (reads on the dark backdrop)
+    const poolCanvas = document.createElement('canvas');
+    poolCanvas.width = poolCanvas.height = 128;
+    const pctx = poolCanvas.getContext('2d');
+    const grad = pctx.createRadialGradient(64, 64, 4, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(255,110,60,0.5)');
+    grad.addColorStop(1, 'rgba(255,110,60,0)');
+    pctx.fillStyle = grad;
+    pctx.fillRect(0, 0, 128, 128);
+    const pool = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.8, 2.8),
+      new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(poolCanvas), transparent: true, depthWrite: false })
     );
-    shadow.rotation.x = -Math.PI / 2;
-    shadow.position.y = -2.2;
-    scene.add(shadow);
-
-    // ── Theme sync (robot recolours when the site theme toggles) ──
-    function applyTheme() {
-      const c = isDarkMode() ? COLORS.dark : COLORS.light;
-      bodyMat.color.setHex(c.body);
-      panelMat.color.setHex(c.panel);
-      jointMat.color.setHex(c.joint);
-      screenMat.color.setHex(c.screen);
-      hemi.intensity = isDarkMode() ? 0.6 : 0.9;
-      warm.intensity = isDarkMode() ? 1.1 : 0.7;
-    }
-    applyTheme();
-    new MutationObserver(applyTheme)
-      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    pool.rotation.x = -Math.PI / 2;
+    pool.position.y = -2.15;
+    root.add(pool);
 
     // ── Mouse tracking ──
     const mouse = { x: 0, y: 0 };
@@ -252,8 +237,8 @@
 
     // ── Resize ──
     function resize() {
-      const w = stage.clientWidth;
-      const h = stage.clientHeight;
+      const w = stage.clientWidth || window.innerWidth;
+      const h = stage.clientHeight || window.innerHeight;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
@@ -261,11 +246,38 @@
     resize();
     window.addEventListener('resize', resize);
 
-    // ── Animation helpers ──
+    // ── Scroll flight path ──
+    // p = scrollY in viewport-heights. Hero is p 0-1, story panels follow.
+    const KEYS = [
+      { p: 0.0, x: 0,    y: -0.5,  s: 1.05, ry: 0 },
+      { p: 1.0, x: 2.3,  y: 0.05,  s: 0.85, ry: -0.55 },          // panel 01: text left, robot right
+      { p: 2.0, x: -2.3, y: 0.05,  s: 0.85, ry: 0.55 },           // panel 02: text right, robot left
+      { p: 3.0, x: 0,    y: -0.2,  s: 0.5,  ry: Math.PI * 2 }     // panel 03: spin-out exit at centre
+    ];
+    const mq = window.matchMedia('(max-width: 768px)');
     const lerp = THREE.MathUtils.lerp;
     const clamp01 = function (v) { return Math.min(1, Math.max(0, v)); };
     const easeOut = function (v) { return 1 - Math.pow(1 - v, 3); };
-    // smooth 0→1→0 envelope: rises over `rise`s, holds, falls over `fall`s
+
+    function sampleKeys(p) {
+      if (p <= KEYS[0].p) return KEYS[0];
+      const last = KEYS[KEYS.length - 1];
+      if (p >= last.p) return last;
+      for (let i = 0; i < KEYS.length - 1; i++) {
+        const a = KEYS[i], b = KEYS[i + 1];
+        if (p >= a.p && p <= b.p) {
+          let t = (p - a.p) / (b.p - a.p);
+          t = t * t * (3 - 2 * t); // smoothstep
+          return {
+            x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t),
+            s: lerp(a.s, b.s, t), ry: lerp(a.ry, b.ry, t)
+          };
+        }
+      }
+      return KEYS[0];
+    }
+
+    // smooth 0→1→0 envelope used by wave & chest cycles
     function envelope(phase, start, end, rise, fall) {
       if (phase < start || phase > end) return 0;
       const inE  = clamp01((phase - start) / rise);
@@ -277,26 +289,38 @@
     let nextBlink = 2.2;
     let blinkAt = -10;
 
-    const WAVE_PERIOD = 7.5;   // wave once per cycle
-    const CHEST_PERIOD = 11;   // chest opens once per cycle
+    const WAVE_PERIOD = 7.5;
+    const CHEST_PERIOD = 11;
 
     function animate() {
       requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
-      // Entry pop-in
-      const entry = easeOut(clamp01(t / 1.4));
-      robot.scale.setScalar(entry);
+      // Scroll progress drives the flight path (disabled on mobile, where the
+      // stage is absolutely positioned inside the hero and scrolls away)
+      const isMobile = mq.matches;
+      const p = isMobile ? 0 : Math.min(window.scrollY / window.innerHeight, 3.2);
+      const k = sampleKeys(p);
+      const fade = isMobile ? 1 : 1 - clamp01((p - 2.55) / 0.55);
+      stage.style.opacity = fade;
+      if (fade <= 0.01) return; // fully flown away — skip rendering
 
-      // Idle hover bob + gentle sway
+      // Entry pop-in + scroll keyframe transform on the root
+      const entry = easeOut(clamp01(t / 1.4));
+      const aspectShift = camera.aspect / 1.6; // keep side keyframes proportional on narrower screens
+      root.position.x = k.x * Math.min(aspectShift, 1.15);
+      root.position.y = k.y;
+      root.scale.setScalar((isMobile ? 0.85 : k.s) * entry);
+
+      // Idle hover bob + gentle sway (robot inside root)
       const bob = Math.sin(t * 1.5) * 0.13;
-      robot.position.y = bob + 0.05;
+      robot.position.y = bob;
       robot.rotation.z = Math.sin(t * 0.7) * 0.025;
 
-      // Mouse-follow: body turns a little, head turns more
-      robot.rotation.y = lerp(robot.rotation.y, mouse.x * 0.38, 0.05);
+      // Face direction = scroll keyframe + mouse-follow
+      robot.rotation.y = lerp(robot.rotation.y, k.ry + mouse.x * 0.35, 0.05);
       robot.rotation.x = lerp(robot.rotation.x, mouse.y * 0.12, 0.05);
-      headGroup.rotation.y = lerp(headGroup.rotation.y, mouse.x * 0.32, 0.07);
+      headGroup.rotation.y = lerp(headGroup.rotation.y, mouse.x * 0.3, 0.07);
       headGroup.rotation.x = lerp(headGroup.rotation.x, mouse.y * 0.22, 0.07);
 
       // Blinking
@@ -311,7 +335,7 @@
       const wavePhase = t % WAVE_PERIOD;
       const waveEnv = envelope(wavePhase, 1.2, 3.4, 0.45, 0.45);
       armR.rotation.z = armRestR + waveEnv * (2.45 + Math.sin(t * 11) * 0.28);
-      armL.rotation.z = armRestL - Math.sin(t * 1.5 + 1) * 0.06; // subtle idle swing
+      armL.rotation.z = armRestL - Math.sin(t * 1.5 + 1) * 0.06;
 
       // Chest panel opening — doors swing, core flares and spins
       const chestPhase = t % CHEST_PERIOD;
@@ -339,10 +363,9 @@
         sat.position.set(Math.cos(a) * 2.05, Math.sin(a) * 2.05, 0);
       });
 
-      // Ground shadow tracks the bob
-      const drop = 1 - (bob + 0.13) / 0.26; // 0 high … 1 low
-      shadow.material.opacity = 0.45 + drop * 0.4;
-      shadow.scale.setScalar(0.85 + drop * 0.2);
+      // Light pool under the robot breathes with the bob
+      pool.material.opacity = 0.75 - (bob + 0.13) * 1.5;
+      pool.scale.setScalar(1 - (bob + 0.13) * 0.5);
 
       renderer.render(scene, camera);
     }
