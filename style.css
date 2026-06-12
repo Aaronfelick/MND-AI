@@ -529,7 +529,7 @@ section {
   font-family: var(--font-display);
   font-weight: 800;
   text-transform: uppercase;
-  font-size: clamp(2.6rem, 8.5vw, 7rem);
+  font-size: clamp(2.4rem, 7vw, 5.6rem);
   line-height: 0.96;
   letter-spacing: -0.02em;
   color: #fff;
@@ -556,10 +556,10 @@ section {
   animation: float 3.4s ease-in-out infinite;
   white-space: nowrap;
 }
-.hero-chip.c1 { top: 31vh;    left: 7vw;  }
-.hero-chip.c2 { top: 47vh;    right: 6vw; animation-delay: 0.8s; }
-.hero-chip.c3 { bottom: 31vh; left: 10vw; animation-delay: 1.6s; }
-.hero-chip.c4 { bottom: 25vh; right: 9vw; animation-delay: 2.4s; }
+.hero-chip.c1 { top: 49vh;    left: 5vw;  }
+.hero-chip.c2 { top: 54vh;    right: 5vw; animation-delay: 0.8s; }
+.hero-chip.c3 { bottom: 27vh; left: 11vw; animation-delay: 1.6s; }
+.hero-chip.c4 { bottom: 22vh; right: 10vw; animation-delay: 2.4s; }
 
 .hero-cine-bottom {
   position: absolute;
@@ -1169,8 +1169,8 @@ footer {
      scrolls away naturally; the scroll-flight keyframes are disabled in JS */
   .robot-stage { position: absolute; inset: 0; }
   .hero-cine { min-height: 620px; }
-  .hero-cine-content { top: 14vh; }
-  .hero-mega { font-size: clamp(2.2rem, 11vw, 3.4rem); }
+  .hero-cine-content { top: 13vh; }
+  .hero-mega { font-size: clamp(2rem, 9.5vw, 2.9rem); }
   .hero-chip { display: none; }
   .hero-cine-bottom { bottom: 7vh; }
   .hero-cine-bottom p { font-size: 13.5px; }

@@ -766,8 +766,10 @@ function showPage(name) {
 
 // ── NAV TRANSPARENCY OVER THE CINEMATIC HERO ──
 function updateNavStyle() {
+  // The dark cinematic region spans the hero plus the three story panels
+  // (~4 viewport heights), so the nav stays transparent through all of it.
   const nav = document.querySelector('nav');
-  const overHero = currentPage === 'home' && window.scrollY < window.innerHeight * 0.7;
+  const overHero = currentPage === 'home' && window.scrollY < window.innerHeight * 3.7;
   nav.classList.toggle('over-hero', overHero);
 }
 window.addEventListener('scroll', updateNavStyle, { passive: true });

@@ -249,7 +249,7 @@
     // ── Scroll flight path ──
     // p = scrollY in viewport-heights. Hero is p 0-1, story panels follow.
     const KEYS = [
-      { p: 0.0, x: 0,    y: -0.5,  s: 1.05, ry: 0 },
+      { p: 0.0, x: 0,    y: -0.55, s: 0.92, ry: 0 },
       { p: 1.0, x: 2.3,  y: 0.05,  s: 0.85, ry: -0.55 },          // panel 01: text left, robot right
       { p: 2.0, x: -2.3, y: 0.05,  s: 0.85, ry: 0.55 },           // panel 02: text right, robot left
       { p: 3.0, x: 0,    y: -0.2,  s: 0.5,  ry: Math.PI * 2 }     // panel 03: spin-out exit at centre
@@ -308,9 +308,9 @@
       // Entry pop-in + scroll keyframe transform on the root
       const entry = easeOut(clamp01(t / 1.4));
       const aspectShift = camera.aspect / 1.6; // keep side keyframes proportional on narrower screens
-      root.position.x = k.x * Math.min(aspectShift, 1.15);
-      root.position.y = k.y;
-      root.scale.setScalar((isMobile ? 0.85 : k.s) * entry);
+      root.position.x = isMobile ? 0 : k.x * Math.min(aspectShift, 1.15);
+      root.position.y = isMobile ? -0.4 : k.y;
+      root.scale.setScalar((isMobile ? 0.55 : k.s) * entry);
 
       // Idle hover bob + gentle sway (robot inside root)
       const bob = Math.sin(t * 1.5) * 0.13;
